@@ -9,7 +9,7 @@ import Header from './components/Header';
 function App() {
 
     const [information, setInformation] = useState();
-    const [info, setInfo] = useState();
+    // const [info, setInfo] = useState();
     const getInformation = async () => {
 
         try
@@ -25,19 +25,19 @@ function App() {
         }
     }
 
-    const getInformationData = async (firstName) => {
-        try
-        {
-            const response = await api.get("/information/${firstName}");
-
-            const singleInfo = response.data;
-
-            setInfo(singleInfo);
-        }
-        catch (error) {
-
-        }
-    }
+    // const getInformationData = async (firstName) => {
+    //     try
+    //     {
+    //         const response = await api.get("/information/${firstName}");
+    //
+    //         const singleInfo = response.data;
+    //
+    //         setInfo(singleInfo);
+    //     }
+    //     catch (error) {
+    //
+    //     }
+    // }
 
     useEffect(() => {
         getInformation().then(r => {});
