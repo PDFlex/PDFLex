@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Client {
+'Type, variableName
+Arraylist<Claim> claimsList
+int accountId
+String firstName
+String lastName
+getClaims()
+addClaim()
+deleteClaim()
+}
+
+abstract class Claim {
+List<Form> forms
+int: claimId
+int: accountId
+List<String> status
+updateStatus()
+getStatus()
+}
+
+class LifeClaim
+Claim <|-- LifeClaim
+
+abstract class Form {
+boolean confirmed
+int: formId
+int: accountId
+Variable filledOut
+Variable inProgress
+checkConfirmed()
+checkFilledOut()
+checkInProgress()
+}
+
+class PhysicianStatement
+class LCInfoRequest
+class LCInitiation
+
+Form <|-- PhysicianStatement
+Form <|-- LCInfoRequest
+Form <|-- LCInitiation
+
+@enduml
