@@ -23,16 +23,12 @@
 - [ ] Documentation update (change that modifies or updates documentation only)
 - [ ] Other (please specify):
 
-## Testing
+## Notes for Reviewer
 
-<!-- Please describe in detail how you tested this pull request. -->
-<!-- This can include tests you added and manual testing. -->
+<!-- Describe how the reviewer can test your code and/or run the feature you have implemented. -->
 
 ## Questions and Comments (if applicable)
 
 ## Checklist
 
 - [ ] I have performed a self-review of my own code.
-- [ ] I have verified that the CI tests have passed. <!-- (check after opening pull request) -->
-- [ ] I have reviewed the test coverage changes reported on Coveralls. <!-- (check after opening pull request) -->
-- [ ] I have added tests for my changes. <!-- (delete this checklist item if not applicable) -->
