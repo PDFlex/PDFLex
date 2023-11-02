@@ -23,7 +23,9 @@ const Header = () => {
                         <NavLink className="nav-link" to ="/members">Members</NavLink>
                     </Nav>
                     <Button variant="outline-info" className="me-2">Vowels</Button>
-                    <Button variant="outline-info" className="me-2">Consonants</Button>
+                    <a href="/brownies">
+                        <Button variant="outline-info" className="me-2">Consonants</Button>
+                    </a>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
