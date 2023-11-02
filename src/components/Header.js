@@ -22,10 +22,13 @@ const Header = () => {
                         <NavLink className="nav-link" to ="/">Home</NavLink>
                         <NavLink className="nav-link" to ="/members">Members</NavLink>
                     </Nav>
-                    <Button variant="outline-info" className="me-2">Vowels</Button>
-                    <a href="/brownies">
-                        <Button variant="outline-info" className="me-2">Consonants</Button>
+                    <a href="/components/Upload2">
+                    <Button variant="outline-info" className="me-2">Upload Files Alternative</Button>
                     </a>
+                    <a href="/components/Upload">
+                        <Button variant="outline-info" className="me-2">Upload Files</Button>
+                    </a>
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>
