@@ -6,6 +6,7 @@ import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home';
 import Header from './components/Header';
 import Upload from "./components/Upload";
+import Upload2 from "./components/Upload2";
 
 function App() {
 

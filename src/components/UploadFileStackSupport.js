@@ -8,6 +8,7 @@ upl.render(
         <Upload2 />
     </React.StrictMode>
 );
+
  // npm install filestack-react
 const client = filestack.init("APlg3y5HwS180OK92teucz");
 client.picker().open();

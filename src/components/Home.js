@@ -11,7 +11,8 @@ const Home = ({information}) => {
             const data = await res.json();
             console.log(data);
             /*eslint no-undef: "off"*/
-            toBeUpdated.innerHTML = JSON.stringify(data);
+            const parsedData = JSON.parse(JSON.stringify(data))
+            toBeUpdated.innerHTML = "Name: " + parsedData.firstName + ", Main Connection: " + parsedData.githubRepo;
         } catch (err) {
             console.log(err);
         }
@@ -19,10 +20,13 @@ const Home = ({information}) => {
     return (
         <div>
             <Container>
-                <p id="toBeUpdated"> </p>
+                <hr></hr>
                 <input id="personChosen" type="text" placeholder='Insert Name Here:'></input>
-                <Button onClick={returnInfo}> Learn More About Me </Button>
+                <Button onClick={returnInfo} > Learn More About Me </Button>
+
                 <br></br>
+                <hr></hr>
+                <p id="toBeUpdated"> </p>
             </Container>
         </div>
     )
