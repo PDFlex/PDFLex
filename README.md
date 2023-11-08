@@ -4,7 +4,7 @@
 
 An interactive dashboard that allows Securian policy holders to seamlessly submit, edit and view their claims online.
 
-Coded with React and hosted on Netlify.
+Coded with React and hosted on Netlify. See our backend [here](https://github.com/PDFlex/pdflex-backend)!
 
 Created by Team Consonants: Ben, Jiya, Lana, Sarah, Vithu!
 
