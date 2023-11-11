@@ -1,6 +1,7 @@
+import React from 'react'
 import {useState} from "react";
 import axios from 'axios';
-
+// Source Code: https://www.filestack.com/fileschool/react/react-file-upload/
 
 const Upload = () => {
     const [file, setFile] = useState()
@@ -11,18 +12,25 @@ const Upload = () => {
 
     function handleSubmit(event) {
         event.preventDefault()
-        const url = 'http://localhost:8080';
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileName', file.name);
-
+        const url = 'http://localhost:8080/pdf';
+        // const formData = new FormData();
+        // formData.append('file', file);
+        // formData.append('fileName', file.name);
+        const basemessage = {
+            "noteBody": "Message",
+            "firstName": "Ben"
+        }
+        //
         const config = {
             headers: {
-                'content-type': 'multipart/form-data',
+                // 'content-type': 'multipart/form-data',
+                'content-type': 'application/json',
+
             },
         };
+        // axios.post(url, formData, config).then((response) => {
 
-        axios.post(url, formData, config).then((response) => {
+        axios.post(url, basemessage).then((response) => {
             console.log(response.data);
         });
 
@@ -36,6 +44,6 @@ const Upload = () => {
                 <button type="submit">Upload</button>
             </form>
         </div>
-);
+    );
 }
 export default Upload;
