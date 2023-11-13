@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home';
 import Header from './components/Header';
-import Brownies from "./components/Brownies";
+import Brownies from "./components/ViewClaims";
 
 function App() {
 
@@ -52,7 +52,7 @@ function App() {
                     <Route path="/" element={<Home information = {information}/>} ></Route>
                     <Route path="/Information/:firstName" element={<Home GetInformationData={information}/>}></Route>;
                 </Route>
-                <Route path="/brownies" element={<Brownies />}></Route>
+                <Route path="/viewClaims" element={<ViewClaims />}></Route>
             </Routes>
         </div>
     );

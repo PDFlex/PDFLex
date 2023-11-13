@@ -23,7 +23,7 @@ const Header = () => {
                         <NavLink className="nav-link" to ="/members">Members</NavLink>
                     </Nav>
                     <Button variant="outline-info" className="me-2">Vowels</Button>
-                    <a href="/brownies">
+                    <a href="/components/ViewClaims">
                         <Button variant="outline-info" className="me-2">Consonants</Button>
                     </a>
                 </Navbar.Collapse>
