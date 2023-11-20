@@ -1,5 +1,5 @@
 import { useState } from "react";
-import formStyles from "./Form.module.css"
+import formStyles from "./Form.module.scss";
 import axios from "axios";
 
 const Form = () => {

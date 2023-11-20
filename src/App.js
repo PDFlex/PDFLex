@@ -6,6 +6,7 @@ import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home';
 // import Header from './components/Header';
 import Form from './components/Form';
+import Login from './components/Login';
 
 function App() {
 
@@ -53,6 +54,8 @@ function App() {
                     <Route path="/Information/:firstName" element={<Home GetInformationData={information}/>}></Route>;
                 </Route>
                 <Route path="/form" element={<Form/>}></Route>;
+                <Route path="/login" element={<Login/>}></Route>;
+
             </Routes>
         </div>
     );
