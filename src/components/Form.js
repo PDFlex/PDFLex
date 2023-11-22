@@ -1,5 +1,4 @@
 import { useState } from "react";
-import formStyles from "./Form.module.scss";
 import axios from "axios";
 
 const Form = () => {
@@ -75,7 +74,7 @@ const Form = () => {
 
             <button onClick={getInfo}>Create form</button>
 
-            <form onSubmit={handleSubmit} className={formStyles.form}>
+            <form onSubmit={handleSubmit}>
 
                 {/* HEADER */}
                 <div className="header">
@@ -85,7 +84,7 @@ const Form = () => {
 
                 {/* DECEASED INFORMATION */}
                 <div className="deceasedInfo">
-                    <h3 className={formStyles.h3}>Deceased Information</h3>
+                    <h3>Deceased Information</h3>
                     <label>Name of deceased (first, middle, last):</label>
                     <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} /><br /><br />
 
