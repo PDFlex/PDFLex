@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
+import axios from "axios";
+// import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -42,6 +44,8 @@ const Label = styled.label`
     position: absolute;
     top: 47%;
     left: 10%;
+    font-size: 1.1em;
+    font-weight: 425;
 `
 
 const Input = styled.input`
@@ -58,7 +62,22 @@ const Input = styled.input`
     &:focus {
         outline: 0.1rem solid #11a346;
     }
-    
+    &::-webkit-inner-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    } 
+    &::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+`
+
+const Message = styled.p`
+    position: absolute;
+    bottom: 24%;
+    left: 10%;
+    font-size: 0.9em;
+    color: #dc143c;
 `
 
 const Button = styled.button`
@@ -81,16 +100,33 @@ const Button = styled.button`
 `
 
 const Login = () => {
-    const [claimNum, setClaimNum] = useState('');
+    const [clientId, setClientId] = useState('');
+    const [verificationMsg, setVerificationMsg] = useState('');
+    // const navigate = useNavigate();
+
+    const verifyClientId = (clientId) => {
+        if (clientId.clientId !== '') {
+            const url = 'http://localhost:8080/login/' + clientId.clientId;
+            axios.get(url).then((res) => {
+                if (res.data === false) {
+                    setVerificationMsg('User not found.')
+                }
+                // } else {
+                //     navigate('/nextpage');
+                // }
+            });
+        }
+    }
 
     return (
         <Container>
             <LoginContainer>
                 <Logo src={securianLogo} alt="Logo"/>
                 <Text>Welcome</Text>
-                <Label>Enter Claim Number</Label>
-                <Input type='text' placeholder='Claim number' value={claimNum} onChange={(e) => setClaimNum(e.target.value)}/>
-                <Button>Login</Button>
+                <Label>Enter Client ID</Label>
+                <Input type='number' placeholder='Client ID' value={clientId} onChange={(e) => setClientId(e.target.value)}/>
+                <Message>{verificationMsg}</Message>
+                <Button onClick={() => verifyClientId({clientId})}>Login</Button>
             </LoginContainer>
         </Container>
     );
