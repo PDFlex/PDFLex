@@ -115,6 +115,8 @@ const Login = () => {
                 //     navigate('/nextpage');
                 // }
             });
+        } else {
+            setVerificationMsg('Please enter client ID.')
         }
     }
 
