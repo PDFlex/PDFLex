@@ -6,47 +6,29 @@ import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home';
 import Header from './components/Header';
 import Upload from "./components/Upload";
-import Upload2 from "./components/Upload2";
 
 function App() {
 
+
     const [information, setInformation] = useState();
-    // const [info, setInfo] = useState();
     const getInformation = async () => {
 
         try
         {
             const response = await api.get("/information");
-
-            // console.log(response.data);
-
             setInformation(response.data);
         }
         catch(err) {
             console.log(err);
         }
     }
-
-    // const getInformationData = async (firstName) => {
-    //     try
-    //     {
-    //         const response = await api.get("/information/${firstName}");
-    //
-    //         const singleInfo = response.data;
-    //
-    //         setInfo(singleInfo);
-    //     }
-    //     catch (error) {
-    //
-    //     }
-    // }
-
+    
     useEffect(() => {
         getInformation().then(r => {});
     }, [])
 
     return (
-        <div className="App">
+    <div className="App">
             <Header/>
             <Routes>
                 <Route exact path="/" element={<Layout/>}>
@@ -54,7 +36,9 @@ function App() {
                     <Route path="/Information/:firstName" element={<Home GetInformationData={information}/>}></Route>;
                 </Route>
                 <Route path="/components/Upload" element={<Upload/>}></Route>
-                <Route path="/components/Upload2" element={<Upload2/>}></Route>
+                {/* <Route path="/components/Login" element={<Login/>}></Route>
+                <Route path="/components/Form" element={<Form/>}></Route> */}
+
             </Routes>
         </div>
     );

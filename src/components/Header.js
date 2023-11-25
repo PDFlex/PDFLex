@@ -3,13 +3,27 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+
+function CreateNewClaim() {
+    let clientId = 3;
+    const basemessage = {
+        "noteBody": "Hiya Ben!",
+        "firstName": "Ben",
+        "clientId": "1234"
+    }
+
+    // Additional Post for CNC:
+    const url2 = 'http://localhost:8080/information/claims';
+    axios.post(url2, basemessage).then(() => {} );
+}
 
 const Header = () => {
 
     return (
-        <Navbar bg = "dark" variant = "dark" expand = "lg">
+        <Navbar bg = "light" variant = "light" expand = "lg">
             <Container fluid>
-                <Navbar.Brand href ="/" style = {{"color": 'gold'}}>
+                <Navbar.Brand href ="/" style = {{"color": '#32a852'}}>
                     PDFlex
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -19,15 +33,9 @@ const Header = () => {
                         style = {{maxHeight: '100px'}}
                         navbarScroll
                     >
-                        <NavLink className="nav-link" to ="/">Home</NavLink>
-                        <NavLink className="nav-link" to ="/members">Members</NavLink>
+                        <NavLink className="nav-link" to ="/ClaimsView">View My Claims</NavLink>
+                        <NavLink className="nav-link" to ="/components/Upload" onClick={CreateNewClaim}>Create New Claim</NavLink>
                     </Nav>
-                    <a href="/components/Upload2">
-                    <Button variant="outline-info" className="me-2">Upload Files Alternative</Button>
-                    </a>
-                    <a href="/components/Upload">
-                        <Button variant="outline-info" className="me-2">Upload Files</Button>
-                    </a>
 
                 </Navbar.Collapse>
             </Container>

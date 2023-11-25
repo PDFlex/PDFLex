@@ -13,27 +13,22 @@ const Upload = () => {
     function handleSubmit(event) {
         event.preventDefault()
         const url = 'http://localhost:8080/pdf';
-        // const formData = new FormData();
-        // formData.append('file', file);
-        // formData.append('fileName', file.name);
-        const basemessage = {
-            "noteBody": "Message",
-            "firstName": "Ben"
-        }
-        //
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('fileName', file.name);
+        const claimId = 1234567;
+        formData.append('claimId', claimId)
+ 
         const config = {
             headers: {
-                // 'content-type': 'multipart/form-data',
-                'content-type': 'application/json',
+                'content-type': 'multipart/form-data',
 
             },
         };
-        // axios.post(url, formData, config).then((response) => {
 
-        axios.post(url, basemessage).then((response) => {
+        axios.post(url, formData, config).then((response) => {
             console.log(response.data);
         });
-
     }
 
     return (
@@ -44,6 +39,6 @@ const Upload = () => {
                 <button type="submit">Upload</button>
             </form>
         </div>
-    );
+);
 }
 export default Upload;
