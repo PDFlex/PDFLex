@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
@@ -100,8 +100,6 @@ const Button = styled.button`
 `
 
 const Upload = () => {
-    // const navigate = useNavigate();
-
     const [file, setFile] = useState()
 
     function handleChange(event) {
@@ -114,34 +112,33 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);
-        const claimId = 1234567;
+        const claimId = 1010;
         formData.append('claimId', claimId)
-
 
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
+
             },
         };
 
         axios.post(url, formData, config).then((response) => {
             console.log(response.data);
         });
-        // navigate('/FormSubmittedView');
     }
-
 
     return (
         <Container>
             <UploadContainer>
-                <form onSubmit={handleSubmit}>
-                    <h1>Submit Life Claim Form</h1>
-                    <input type="file" onChange={handleChange}/>
-                    <button type="submit">Upload</button>
-                </form>
+                <div className="upload">
+                    <form onSubmit={handleSubmit}>
+                        <Text>Submit Life Claim Form</Text>
+                        <Input type="file" onChange={handleChange}/>
+                        <Button type="submit">Upload</Button>
+                    </form>
+                </div>
             </UploadContainer>
         </Container>
     );
-
 }
 export default Upload;
