@@ -14,7 +14,7 @@ function CreateNewClaim() {
     }
 
     // Additional Post for CNC:
-    const url2 = 'http://localhost:8080/information/claims';
+    const url2 = 'http://localhost:8080/new-claim';
     axios.post(url2, basemessage).then(() => {} );
 }
 
@@ -35,6 +35,8 @@ const Header = () => {
                     >
                         <NavLink className="nav-link" to ="/ClaimsView">View My Claims</NavLink>
                         <NavLink className="nav-link" to ="/components/Upload" onClick={CreateNewClaim}>Create New Claim</NavLink>
+
+                        {/*<NavLink className="nav-link" to ="/components/Upload" >Create New Claim</NavLink>*/}
                     </Nav>
 
                 </Navbar.Collapse>
