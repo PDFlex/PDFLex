@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import * as PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom"; // Allows us to redirect to other pages in the future
+import {useNavigate} from "react-router-dom";
+// import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -13,9 +14,18 @@ const Container = styled.div`
     height: 100vh;
     background-image: url(${backgroundImage});
     background-size: cover;
-
 `
-const UploadContainer = styled.div`
+
+const CreateNewClaimContainer = styled.div`
+    position: relative;
+    width: 40%;
+    height: 60%;
+    margin: auto;
+    box-shadow: 0 0 2rem 0.5rem black;
+    border-radius: 1rem;
+    background-color: #fbfaf2;
+`
+const ClaimsContainer = styled.div`
     position: relative;
     width: 40%;
     height: 60%;
@@ -99,49 +109,36 @@ const Button = styled.button`
     }
 `
 
-const Upload = () => {
-    const [file, setFile] = useState()
+const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
 
+    function CreateNewClaim() {
+        const basemessage = {
+            "noteBody": "Hiya Ben!",
+            "firstName": "Ben",
+            "clientId": "1234"
+        }
+        navigate('/SelectFillOrUpload');
 
-    function handleChange(event) {
-        setFile(event.target.files[0])
+
+        const url2 = 'http://localhost:8080/new-claim';
+        axios.post(url2, basemessage).then(() => {} );
+    }
+    function ReturnToClaimsDashboard() {
+        navigate('/ViewClaimsDashboard');
     }
 
-    function handleSubmit(event) {
-        event.preventDefault()
-        const url = 'http://localhost:8080/pdf';
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileName', file.name);
-        const claimId = 1010;
-        formData.append('claimId', claimId)
-
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data',
-
-            },
-        };
-
-        axios.post(url, formData, config).then((response) => {
-            console.log(response.data);
-        });
-        navigate("/FormSubmittedView");
-    }
 
     return (
         <Container>
-            <UploadContainer>
-                <div className="upload">
-                    <form onSubmit={handleSubmit}>
-                        <Text>Submit Life Claim Form</Text>
-                        <Input type="file" onChange={handleChange}/>
-                        <Button type="submit">Upload</Button>
-                    </form>
-                </div>
-            </UploadContainer>
+            <ClaimsContainer>
+                <Logo src={securianLogo} alt="Logo"/>
+                <Text>Form Successfully Submitted! </Text>
+                <Button onClick={ReturnToClaimsDashboard}>Return to Claims Dashboard</Button>
+
+        </ClaimsContainer>
         </Container>
     );
 }
-export default Upload;
+
+export default ViewClaimsDashboard;

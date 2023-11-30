@@ -4,6 +4,8 @@ import Login from './components/Login';
 import ViewClaimsDashboard from "./components/ViewClaimsDashboard";
 import SelectFillOrUpload from "./components/SelectFillOrUpload";
 import Upload from "./components/Upload";
+import Form from "./components/Form";
+import FormSubmittedView from "./components/FormSubmittedView";
 
 function App() {
 
@@ -16,6 +18,12 @@ function App() {
                 <Route path="/ViewClaimsDashboard" element={<ViewClaimsDashboard/>}></Route>;
                 <Route path="/SelectFillOrUpload" element={<SelectFillOrUpload/>}></Route>;
                 <Route path="/Upload" element={<Upload/>}></Route>;
+                <Route path="/Form" element={<Form/>}></Route>;
+                <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
+
+
+
+
 
 
             </Routes>
