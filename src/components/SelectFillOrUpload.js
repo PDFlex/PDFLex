@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-//Allows us to redirect to other pages in the future
+import * as PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom"; // Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -15,16 +15,24 @@ const Container = styled.div`
     background-size: cover;
 `
 
-const LoginContainer = styled.div`
+const SelectContainer = styled.div`
     position: relative;
     width: 40%;
-    height: 60%;
+    height: 40%;
     margin: auto;
     box-shadow: 0 0 2rem 0.5rem black;
     border-radius: 1rem;
     background-color: #fbfaf2;
 `
-
+const SelectFillContainer = styled.div`
+    position: relative;
+    width: 40%;
+    height: 40%;
+    margin: auto;
+    box-shadow: 0 0 2rem 0.5rem black;
+    border-radius: 1rem;
+    background-color: #fbfaf2;
+`
 const Logo = styled.img`
     position: absolute;
     top: 5%;
@@ -83,14 +91,14 @@ const Message = styled.p`
 
 const Button = styled.button`
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     right: 10%;
     display: block;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 1.5em;
     background-color: #11a346;
     border: none;
-    padding: 1% 4%;
+    padding: 20% 30%;
     font-size: 1.4em;
     text-align: center;
     text-decoration: none;
@@ -100,39 +108,27 @@ const Button = styled.button`
     }
 `
 
-const Login = () => {
-    const [clientId, setClientId] = useState('');
-    const [verificationMsg, setVerificationMsg] = useState('');
+const SelectFillOrUpload = () => {
     const navigate = useNavigate();
 
-    const verifyClientId = (clientId) => {
-        if (clientId.clientId !== '') {
-            const url = 'http://localhost:8080/login/' + clientId.clientId;
-            axios.get(url).then((res) => {
-                if (res.data === false) {
-                    setVerificationMsg('User not found.')
-                }
-                else {
-                    navigate('/ViewClaimsDashboard');
-                }
-            });
-        } else {
-            setVerificationMsg('Please enter client ID.')
-        }
+    function SelectUpload() {
+        navigate('/Upload');
     }
+    function SelectFill() {
+        navigate('/Form');
+    }
+
 
     return (
         <Container>
-            <LoginContainer>
-                <Logo src={securianLogo} alt="Logo"/>
-                <Text>Welcome</Text>
-                <Label>Enter Client ID</Label>
-                <Input type='number' placeholder='Client ID' value={clientId} onChange={(e) => setClientId(e.target.value)}/>
-                <Message>{verificationMsg}</Message>
-                <Button onClick={() => verifyClientId({clientId})}>Login</Button>
-            </LoginContainer>
+            <SelectContainer>
+                <Button onClick={SelectUpload}>Upload PDF File</Button>
+            </SelectContainer>
+            <SelectContainer>
+                <Button onClick={SelectFill}>Fill Out Form</Button>
+            </SelectContainer>
         </Container>
     );
 }
- 
-export default Login;
+
+export default SelectFillOrUpload;

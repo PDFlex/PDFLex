@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-//Allows us to redirect to other pages in the future
+import * as PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom"; // Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -13,9 +13,9 @@ const Container = styled.div`
     height: 100vh;
     background-image: url(${backgroundImage});
     background-size: cover;
-`
 
-const LoginContainer = styled.div`
+`
+const UploadContainer = styled.div`
     position: relative;
     width: 40%;
     height: 60%;
@@ -24,7 +24,6 @@ const LoginContainer = styled.div`
     border-radius: 1rem;
     background-color: #fbfaf2;
 `
-
 const Logo = styled.img`
     position: absolute;
     top: 5%;
@@ -100,39 +99,49 @@ const Button = styled.button`
     }
 `
 
-const Login = () => {
-    const [clientId, setClientId] = useState('');
-    const [verificationMsg, setVerificationMsg] = useState('');
-    const navigate = useNavigate();
+const Upload = () => {
+    // const navigate = useNavigate();
 
-    const verifyClientId = (clientId) => {
-        if (clientId.clientId !== '') {
-            const url = 'http://localhost:8080/login/' + clientId.clientId;
-            axios.get(url).then((res) => {
-                if (res.data === false) {
-                    setVerificationMsg('User not found.')
-                }
-                else {
-                    navigate('/ViewClaimsDashboard');
-                }
-            });
-        } else {
-            setVerificationMsg('Please enter client ID.')
-        }
+    const [file, setFile] = useState()
+
+    function handleChange(event) {
+        setFile(event.target.files[0])
     }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        const url = 'http://localhost:8080/pdf';
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('fileName', file.name);
+        const claimId = 1234567;
+        formData.append('claimId', claimId)
+
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            },
+        };
+
+        axios.post(url, formData, config).then((response) => {
+            console.log(response.data);
+        });
+        // navigate('/FormSubmittedView');
+    }
+
 
     return (
         <Container>
-            <LoginContainer>
-                <Logo src={securianLogo} alt="Logo"/>
-                <Text>Welcome</Text>
-                <Label>Enter Client ID</Label>
-                <Input type='number' placeholder='Client ID' value={clientId} onChange={(e) => setClientId(e.target.value)}/>
-                <Message>{verificationMsg}</Message>
-                <Button onClick={() => verifyClientId({clientId})}>Login</Button>
-            </LoginContainer>
+            <UploadContainer>
+                <form onSubmit={handleSubmit}>
+                    <h1>Submit Life Claim Form</h1>
+                    <input type="file" onChange={handleChange}/>
+                    <button type="submit">Upload</button>
+                </form>
+            </UploadContainer>
         </Container>
     );
+
 }
- 
-export default Login;
+export default Upload;
