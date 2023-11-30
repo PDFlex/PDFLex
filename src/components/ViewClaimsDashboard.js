@@ -111,6 +111,21 @@ const Button = styled.button`
 
 const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
+    const url = 'http://localhost:8080/1234/claims';
+    const [Claims, setClaims] = useState('');
+
+    axios.get(url).then((res) => {
+        // const data = res.json();
+        const parsedData = JSON.parse(JSON.stringify(res.data))
+        /*eslint no-undef: "off"*/
+        console.log(parsedData)
+        let claimsIds = "";
+        for (let i = 0; i<parsedData.length; i++){
+            claimsIds += " Claimd Id:" + parsedData[i].claimId;
+        }
+        setClaims(claimsIds);
+
+    });
 
     function CreateNewClaim() {
         const basemessage = {
@@ -130,7 +145,10 @@ const ViewClaimsDashboard = () => {
             <ClaimsContainer>
                 <Logo src={securianLogo} alt="Logo"/>
                 <Text>Welcome User:</Text>
-                <Label>Current Claims are: </Label>
+                {/*<Label>Current Claims are: </Label>*/}
+                <Label id={"claimsList"}></Label>
+                <Message>{Claims}</Message>
+
             </ClaimsContainer>
             <CreateNewClaimContainer>
                 <Button onClick={CreateNewClaim}>Create New Claim</Button>
