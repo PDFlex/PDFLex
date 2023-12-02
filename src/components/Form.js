@@ -105,7 +105,7 @@ const Form = () => {
     // MEDICAL INFORMATION
     const [causeOfDeath, setCauseOfDeath] = useState('');
     const [deceasedHospitalized, setDeceasedHospitalized] = useState(false);
-    const [hospitalizationDate, setHospitalizationDate] = useState(new Date()); // CURRENTLY NOT IN MONGO DB
+    const [hospitalizationDate, setHospitalizationDate] = useState(new Date());
     const [hospitalName, setHospitalName] = useState('');
     const [hospitalAddress, setHospitalAddress] = useState('');
 
@@ -133,7 +133,8 @@ const Form = () => {
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
     const [workContactNumber, setWorkContactNumber] = useState('');
-    const [reasonInsuredStoppedWorking, setReasonInsuredStoppedWorking] = useState('');
+    var [reasonInsuredStoppedWorking, setReasonInsuredStoppedWorking] = useState('');
+    const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
     const [nameofKin, setNameOfKin] = useState('');
@@ -146,6 +147,10 @@ const Form = () => {
     // Function that sends the form information to the backend
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (reasonInsuredStoppedWorking === 'Other') {
+            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingOther;
+        }
         
         const form = {
             deceasedName, dateOfBirth, dateOfDeath,
@@ -175,7 +180,7 @@ const Form = () => {
                     <Input type="number" span = {2} value={claimId} onChange={(e) => setClaimId(e.target.value)}/>
 
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} value={completedDeathCertificate} onChange={(e) => setCompletedClaimSubmission(true)}/>
+                        <Input type="checkbox" span = {2} value={completedDeathCertificate} onChange={(e) => setCompletedDeathCertificate(true)}/>
                         Has the Certification of Death form been completed by the attending physician, coroner, or family doctor?
                     </Label>
                     <Label span = {2}>
@@ -288,10 +293,11 @@ const Form = () => {
                         <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Death")}/>
                         Death
                     </Label>
-
-                    {/* FIX THIS BEHAVIOUR */}
-                    <Label span = {2}>Other (please specify):</Label>
-                    <Input type="text" span = {2} value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking(e.target.value)}/>
+                    <Label span = {2}>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Other")}/>
+                        Other (please specify):
+                    </Label>
+                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
                 </Section>
 
                 {/* NEXT OF KIN INFORMATION */}
