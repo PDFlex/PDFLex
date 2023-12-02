@@ -92,7 +92,7 @@ const Button = styled.button`
 
 const Form = () => {
     // CLAIM CHECKLIST
-    const [claimId, setClaimId] = useState();
+    const [claimId, setClaimId] = useState('');
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
     const [attachedDeathCertificate, setAttachedDeathCertificate] = useState(false);
     const [completedClaimSubmission, setCompletedClaimSubmission] = useState(false);
@@ -133,7 +133,7 @@ const Form = () => {
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
     const [workContactNumber, setWorkContactNumber] = useState('');
-    var [reasonInsuredStoppedWorking, setReasonInsuredStoppedWorking] = useState('');
+    const [reasonInsuredStoppedWorkingRadio, setReasonInsuredStoppedWorkingRadio] = useState('');
     const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
@@ -147,12 +147,16 @@ const Form = () => {
     // Function that sends the form information to the backend
     const handleSubmit = (e) => {
         e.preventDefault();
+        let reasonInsuredStoppedWorking = '';
 
-        if (reasonInsuredStoppedWorking === 'Other') {
+        if (reasonInsuredStoppedWorkingRadio === 'Other') {
             reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingOther;
+        } else {
+            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingRadio;
         }
         
         const form = {
+            claimId, completedDeathCertificate, attachedDeathCertificate, completedClaimSubmission,
             deceasedName, dateOfBirth, dateOfDeath,
             causeOfDeath, deceasedHospitalized, hospitalizationDate, hospitalName, hospitalAddress,
             attendingPhysicianName, attendingPhysicianAddress, attendingPhysicianContactNumber,
@@ -162,7 +166,6 @@ const Form = () => {
             workAddress, workContactNumber, reasonInsuredStoppedWorking,
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
-        console.log(JSON.stringify(form));
 
         const url = 'http://localhost:8080/form-info/post';
         axios.post(url, form).then(() => {});
@@ -171,7 +174,7 @@ const Form = () => {
     return (
         <Container>
             <FormContainer onSubmit={handleSubmit}>
-                <Title>Life Claim Information Request</Title>
+            <Title>Life Claim Information Request</Title>
                 
                 {/* CLAIM CHECKLIST */}
                 <Section>
@@ -226,8 +229,8 @@ const Form = () => {
 
                     <Label span = {1}> Name of hospital </Label>
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
-                    <Input type="date" span = {1} value={hospitalName} onChange={(e) => setHospitalName(e.target.value)}/>
-                    <Input type="date" span = {1} value={hospitalAddress} onChange={(e) => setHospitalAddress(e.target.value)}/>
+                    <Input type="text" span = {1} value={hospitalName} onChange={(e) => setHospitalName(e.target.value)}/>
+                    <Input type="text" span = {1} value={hospitalAddress} onChange={(e) => setHospitalAddress(e.target.value)}/>
 
                     <Label span = {2}> Name of attending physician at time of death </Label>
                     <Input type="text" span = {2} value={attendingPhysicianName} onChange={(e) => setAttendingPhysicianName(e.target.value)}/>
@@ -278,23 +281,23 @@ const Form = () => {
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Normal retirement")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Normal retirement")}/>
                         Normal retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Disability retirement")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Disability retirement")}/>
                         Disability retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Illness")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Illness")}/>
                         Illness
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Death")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Death")}/>
                         Death
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorking} onChange={(e) => setReasonInsuredStoppedWorking("Other")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
                     <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
