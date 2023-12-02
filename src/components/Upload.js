@@ -127,7 +127,7 @@ const Upload = () => {
         axios.post(url, formData, config).then((response) => {
             console.log(response.data);
         });
-        navigate("/FormSubmittedView");
+        navigate("/Form");
     }
 
     return (
