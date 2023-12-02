@@ -121,13 +121,24 @@ const Form = () => {
         const url = 'http://localhost:8080/form-info/post';
         axios.post(url, form).then(() => {});
     }
+    //
+    // const getInfo = () => {
+    let claimId = '1001';
+    const url2 = 'http://localhost:8080/form-info/' + claimId;
+    axios.get(url2, claimId).then((res) => {
+        console.log(res);
+        setDeceasedName(res.data.deceasedName);
+        setDeceasedHospitalized(new Boolean(res.data.deceasedHospitalized));
+        setPastPhysicianNames(res.data.pastPhysicianNames);
+        // setDateOfDeath(res.data.dateOfDeath)
+        setDateOfDeath(new Date("2011-10-10T14:48:00.000+09:00"));
 
-    const getInfo = () => {
-        const url2 = 'http://localhost:8080/form-info/get';
-        axios.get(url2).then((res) => {
-            console.log(res)
-        });
-    }
+
+
+
+
+    });
+    // }
     function FormSubmittedView() {
         navigate('/FormSubmittedView');
     }
