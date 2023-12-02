@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from "axios";
 
 const Container = styled.div`
+    display: flex;
     background-color: #bdd4bc;
 `
 
@@ -35,6 +36,13 @@ const Label = styled.label`
     margin: 0.3rem 0.3rem 0;
 `
 
+const BoldedLabel = styled.label`
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 1rem 0.3rem 0.1rem;
+    grid-column: span 2;
+`
+
 const Input = styled.input`
     padding: 0.5rem 1rem;
     margin: 0.1rem 0.3rem 0.3rem;
@@ -59,6 +67,28 @@ const Input = styled.input`
 const Paragraph = styled.p`
     grid-column: span 2;
 `
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const Button = styled.button`
+    box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
+    border-radius: 1.5em;
+    background-color: #11a346;
+    border: none;
+    margin: 1rem;
+    padding: 1% 2%;
+    font-size: 1.3em;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    &:hover{
+        background-color: #0c7c44;
+    }
+` 
 
 const Form = () => {
     // CLAIM CHECKLIST
@@ -87,8 +117,15 @@ const Form = () => {
     const [familyPhysicianAddress, setFamilyPhysicianAddress] = useState('');
     const [familyPhysicianContactNumber, setFamilyPhysicianContactNumber] = useState('');
 
-    const [pastPhysicianNames, setPastPhysicianNames] = useState([]);
-    const [pastPhysicianAddresses, setPastPhysicianAddresses] = useState([]);
+    const [pastPhysicianName1, setPastPhysicianName1] = useState('');
+    const [pastPhysicianAddress1, setPastPhysicianAddress1] = useState('');
+    const [pastPhysicianName2, setPastPhysicianName2] = useState('');
+    const [pastPhysicianAddress2, setPastPhysicianAddress2] = useState('');
+    const [pastPhysicianName3, setPastPhysicianName3] = useState('');
+    const [pastPhysicianAddress3, setPastPhysicianAddress3] = useState('');
+
+    const pastPhysicianNames = [pastPhysicianName1, pastPhysicianName2, pastPhysicianName3];
+    const pastPhysicianAddresses = [pastPhysicianAddress1, pastPhysicianAddress2, pastPhysicianAddress3];
 
     // EMPLOYMENT INFORMATION
     const [occupation, setOccupation] = useState('');
@@ -203,7 +240,19 @@ const Form = () => {
                     <Input type="text" span = {1} value={familyPhysicianAddress} onChange={(e) => setFamilyPhysicianAddress(e.target.value)}/>
                     <Input type="text" span = {1} value={familyPhysicianContactNumber} onChange={(e) => setFamilyPhysicianContactNumber(e.target.value)}/>
 
-                    {/* TODO: List of past family physicians */}
+                    <BoldedLabel> List the name and address of all physicians who treated the insured in the last 2 years </BoldedLabel>
+                    <Label span = {1}> Physician Name </Label>
+                    <Label span = {1}> Physician Address </Label>
+                    <Input type="text" span = {1} value={pastPhysicianName1} onChange={(e) => setPastPhysicianName1(e.target.value)}/>
+                    <Input type="text" span = {1} value={pastPhysicianAddress1} onChange={(e) => setPastPhysicianAddress1(e.target.value)}/>
+                    <Label span = {1}> Physician Name </Label>
+                    <Label span = {1}> Physician Address </Label>
+                    <Input type="text" span = {1} value={pastPhysicianName2} onChange={(e) => setPastPhysicianName2(e.target.value)}/>
+                    <Input type="text" span = {1} value={pastPhysicianAddress2} onChange={(e) => setPastPhysicianAddress2(e.target.value)}/>
+                    <Label span = {1}> Physician Name </Label>
+                    <Label span = {1}> Physician Address </Label>
+                    <Input type="text" span = {1} value={pastPhysicianName3} onChange={(e) => setPastPhysicianName3(e.target.value)}/>
+                    <Input type="text" span = {1} value={pastPhysicianAddress3} onChange={(e) => setPastPhysicianAddress3(e.target.value)}/>
                 </Section>
 
                 {/* EMPLOYMENT INFORMATION */}
@@ -259,6 +308,7 @@ const Form = () => {
                     <Input type="text" span = {1} value={kinContactNumber} onChange={(e) => setKinContactNumber(e.target.value)}/>
                 </Section>
 
+                {/* AUTHORIZATION */}
                 <Section>
                     <Heading>Authorization</Heading>
                     <Paragraph>
@@ -280,6 +330,10 @@ const Form = () => {
                     <Input type="text" span = {1} value={kinSignature} onChange={(e) => setKinSignature(e.target.value)}/>
                     <Input type="date" span = {1} value={dateSigned} onChange={(e) => setDateSigned(e.target.value)}/>
                 </Section>
+
+                <ButtonContainer>
+                    <Button>Looks good to me</Button>
+                </ButtonContainer>
             </FormContainer>
         </Container>
     );
