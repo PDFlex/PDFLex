@@ -341,7 +341,7 @@ const Form = () => {
                 </Section>
 
                 <ButtonContainer>
-                    <Button>Looks good to me</Button>
+                    <Button>Submit form</Button>
                 </ButtonContainer>
             </FormContainer>
         </Container>
