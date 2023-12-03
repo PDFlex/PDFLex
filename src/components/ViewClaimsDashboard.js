@@ -121,7 +121,7 @@ const ViewClaimsDashboard = () => {
         console.log(parsedData)
         let claimsIds = "";
         for (let i = 0; i<parsedData.length; i++){
-            claimsIds += " Claimd Id:" + parsedData[i].claimId;
+            claimsIds += "Claim Id:" + parsedData[i].claimId;
         }
         setClaims(claimsIds);
 
