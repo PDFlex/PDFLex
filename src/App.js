@@ -6,6 +6,7 @@ import SelectFillOrUpload from "./components/SelectFillOrUpload";
 import Upload from "./components/Upload";
 import Form from "./components/Form";
 import FormSubmittedView from "./components/FormSubmittedView";
+import ViewFormsDashboard from "./components/ViewFormsDashboard";
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
                 <Route path="/Upload" element={<Upload/>}></Route>;
                 <Route path="/Form" element={<Form/>}></Route>;
                 <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
+                <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
+
 
 
 
