@@ -167,7 +167,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080/form-info/post';
+        const url = 'http://159.203.24.109:8080/form-info/post';
         axios.post(url, form).then(() => {});
     }
 
