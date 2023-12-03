@@ -4,6 +4,7 @@ import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {UserIdContext} from "../App";
 //Allows us to redirect to other pages in the future
 
 const Container = styled.div`
@@ -102,7 +103,8 @@ const Button = styled.button`
 
 const Login = () => {
 
-    const [clientId, setClientId] = useState('');
+    // const [clientId, setClientId] = useState('');
+    const {clientId, setClientId} = useContext(UserIdContext)
     const [verificationMsg, setVerificationMsg] = useState('');
     const navigate = useNavigate();
 
@@ -137,41 +139,41 @@ const Login = () => {
 }
  
 export default Login;
-
-// Create a context to hold the user ID
-const UserIdContext = createContext();
-
-// A component that provides the user ID to its children
-export const UserIdProvider = ({ children }) => {
-    // State to hold the user ID
-    const [userId, setUserId] = useState(null);
-
-    // Function to update the user ID
-    // const updateUserId = clientId => {
-    setUserId(clientId.clientId);
-    // };
-
-    return (
-        // Provide the user ID and update function to children components
-        <UserIdContext.Provider value={{ userId }}>
-            {children}
-        </UserIdContext.Provider>
-    );
-};
 //
-// A component that consumes the user ID
-export const UserProfile = () => {
-    // Consume the user ID from the context
-    const { userId } = useContext(UserIdContext);
-
-    return (
-        <div>
-            <h2>User Profile</h2>
-            {/* Display the user ID */}
-            <p>User ID: {userId}</p>
-        </div>
-    );
-};
+// // Create a context to hold the user ID
+// const UserIdContext = createContext();
+//
+// // A component that provides the user ID to its children
+// export const UserIdProvider = ({ children }) => {
+//     // State to hold the user ID
+//     const [userId, setUserId] = useState(null);
+//
+//     // Function to update the user ID
+//     // const updateUserId = clientId => {
+//     setUserId(clientId.clientId);
+//     // };
+//
+//     return (
+//         // Provide the user ID and update function to children components
+//         <UserIdContext.Provider value={{ userId }}>
+//             {children}
+//         </UserIdContext.Provider>
+//     );
+// };
+// //
+// // A component that consumes the user ID
+// export const UserProfile = () => {
+//     // Consume the user ID from the context
+//     const { userId } = useContext(UserIdContext);
+//
+//     return (
+//         <div>
+//             <h2>User Profile</h2>
+//             {/* Display the user ID */}
+//             <p>User ID: {userId}</p>
+//         </div>
+//     );
+// };
 
 // A component that updates the user ID
 // export const UpdateUserId = () => {
