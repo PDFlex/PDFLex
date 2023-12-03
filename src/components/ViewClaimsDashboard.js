@@ -6,6 +6,8 @@ import axios from "axios";
 import * as PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
 // import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
+import React, { useContext } from 'react';
+import {UserIdProvider, UserProfile } from './Login'
 
 const Container = styled.div`
     display: flex;
@@ -152,9 +154,18 @@ const ViewClaimsDashboard = () => {
             </ClaimsContainer>
             <CreateNewClaimContainer>
                 <Button onClick={CreateNewClaim}>Create New Claim</Button>
+                <UserIdProvider>
+                    <div>
+                        {/* Components that consume or update the user ID */}
+                        <UserProfile />
+                    </div>
+                </UserIdProvider>
             </CreateNewClaimContainer>
+
         </Container>
+
     );
 }
 
 export default ViewClaimsDashboard;
+

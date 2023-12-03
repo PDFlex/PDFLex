@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {createContext, useContext, useState} from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
@@ -101,6 +101,7 @@ const Button = styled.button`
 `
 
 const Login = () => {
+
     const [clientId, setClientId] = useState('');
     const [verificationMsg, setVerificationMsg] = useState('');
     const navigate = useNavigate();
@@ -136,3 +137,60 @@ const Login = () => {
 }
  
 export default Login;
+
+// Create a context to hold the user ID
+const UserIdContext = createContext();
+
+// A component that provides the user ID to its children
+export const UserIdProvider = ({ children }) => {
+    // State to hold the user ID
+    const [userId, setUserId] = useState(null);
+
+    // Function to update the user ID
+    // const updateUserId = clientId => {
+    setUserId(clientId.clientId);
+    // };
+
+    return (
+        // Provide the user ID and update function to children components
+        <UserIdContext.Provider value={{ userId }}>
+            {children}
+        </UserIdContext.Provider>
+    );
+};
+//
+// A component that consumes the user ID
+export const UserProfile = () => {
+    // Consume the user ID from the context
+    const { userId } = useContext(UserIdContext);
+
+    return (
+        <div>
+            <h2>User Profile</h2>
+            {/* Display the user ID */}
+            <p>User ID: {userId}</p>
+        </div>
+    );
+};
+
+// A component that updates the user ID
+// export const UpdateUserId = () => {
+//     // Consume the update function from the context
+//     const { updateUserId } = useContext(UserIdContext);
+//
+//     // Function to update the user ID with a random value
+//     const handleUpdateClick = () => {
+//         // Simulate changing the user ID (generating a random number)
+//         const newId = Math.floor(Math.random() * 1000);
+//         updateUserId(newId);
+//     };
+//
+//     return (
+//         <div>
+//             <h2>Update User ID</h2>
+//             {/* Button to trigger the update function */}
+//             <button onClick={handleUpdateClick}>Change User ID</button>
+//         </div>
+//     );
+// };
+
