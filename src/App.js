@@ -22,13 +22,6 @@ function App() {
                 <Route path="/Form" element={<Form/>}></Route>;
                 <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
                 <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
-
-
-
-
-
-
-
             </Routes>
         </div>
     );
