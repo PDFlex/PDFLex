@@ -4,7 +4,6 @@ import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -111,8 +110,7 @@ const Login = () => {
             axios.get(url).then((res) => {
                 if (res.data === false) {
                     setVerificationMsg('User not found.')
-                }
-                else {
+                } else {
                     navigate('/ViewClaimsDashboard');
                 }
             });
