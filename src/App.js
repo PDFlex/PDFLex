@@ -7,11 +7,26 @@ import Upload from "./components/Upload";
 import Form from "./components/Form";
 import FormSubmittedView from "./components/FormSubmittedView";
 import ViewFormsDashboard from "./components/ViewFormsDashboard";
+import {createContext, useContext, useState} from "react";
+
+
+// Create a context to hold the user ID
+export const UserIdContext = createContext({
+    clientId: "",
+    setClientId:() => {}
+});
+export const ClaimContext = createContext({
+    claimId: "",
+    setClaimId:() => {}
+});
 
 function App() {
+    const [clientId, setClientId] = useState('');
 
     return (
         <div className="App">
+            <UserIdContext.Provider value={{clientId: clientId, setClientId: setClientId}}>
+
             <Routes>
                 <Route path="/" element={<Login/>}></Route>;
                 {/* Create New Route here for each page (Create new Js file in components)
@@ -23,8 +38,11 @@ function App() {
                 <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
                 <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
             </Routes>
+            </UserIdContext.Provider>
+
         </div>
-    );
+
+);
 }
 
 export default App;

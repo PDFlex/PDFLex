@@ -1,11 +1,15 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import * as PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
+import {Table} from "react-bootstrap";
 // import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
+import React, { useContext } from 'react';
+// import {UserIdProvider, UserProfile } from './Login'
+import {UserIdContext} from "../App";
 
 const Container = styled.div`
     display: flex;
@@ -112,32 +116,61 @@ const Button = styled.button`
 const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
     const url = 'http://localhost:8080/1234/claims';
+    const {clientId, setClientId} = useContext(UserIdContext)
     const [Claims, setClaims] = useState('');
+    const [tableData, setTableData] = useState([]);
+    console.log(clientId);
 
-    axios.get(url).then((res) => {
-        // const data = res.json();
-        const parsedData = JSON.parse(JSON.stringify(res.data))
-        /*eslint no-undef: "off"*/
-        console.log(parsedData)
-        let claimsIds = "";
-        for (let i = 0; i<parsedData.length; i++){
-            claimsIds += "Claim Id:" + parsedData[i].claimId;
-        }
-        setClaims(claimsIds);
+    useEffect(() => {
+        axios.get(url).then((res) => {
+            const parsedData = JSON.parse(JSON.stringify(res.data))
+            let claimType = "Life Claim";
+            const newClaims = [];
 
-    });
+            for (let i = 0; i < parsedData.length; i++) {
+                const newElement = {
+                    id: parsedData[i].claimId, // Example: incrementing ID
+                    claimType: claimType, // Example: generating a name
+                    // status: parsedData[i].status,
+                    date: new Date()
+                };
+                newClaims.push(newElement);
+                // setTableData([...tableData, newElement]);
+                // document.select("tbody").insert("tr").html("<td>" + (parsedData[i].claimId) + "</td>" + "<td>" + (claimType) +  "</td>" + "<td>" + (parsedData[i].status) +  "</td>" +"<td>" + (new Date()) +  "</td>");
+            }
+            setTableData([...tableData, ...newClaims]);
+
+
+        });
+    }, [clientId]);
+
 
     function CreateNewClaim() {
         const basemessage = {
-            "noteBody": "Hiya Ben!",
-            "firstName": "Ben",
-            "clientId": "1234"
+            "clientId": 1234
         }
         navigate('/SelectFillOrUpload');
 
 
         const url2 = 'http://localhost:8080/new-claim';
         axios.post(url2, basemessage).then(() => {} );
+    }
+
+    function renderTable(tableData) {
+        return tableData.map(item => (
+            <tr key={item.id}>
+                {/*Insert React Link inside the td surrounding item.id*/}
+                {/*<td><Link to={something}>{item.id}</Link></td>*/}
+                <td>{item.id}</td>
+                <td>{item.claimType}</td>
+                {/*<td>{item.status}</td>*/}
+                <td>{item.date.toString()}</td>
+
+
+                {/* Render other cells based on item properties */}
+            </tr>
+        ))
+
     }
 
     return (
@@ -147,14 +180,44 @@ const ViewClaimsDashboard = () => {
                 <Text>Welcome User:</Text>
                 {/*<Label>Current Claims are: </Label>*/}
                 <Label id={"claimsList"}></Label>
+                <Table className="table" cellPadding="10">
+                    <thead>
+                    <tr>
+                        <th scope="col" id="Id">Id</th>
+                        <th scope="col" id="claimtype">Type</th>
+                        <th scope="col" id="claimstatus">Status</th>
+                        <th scope="col" id="date">Date Filed</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {/* Mapping through tableData to render rows */}
+                    {renderTable(tableData)}
+                    </tbody>
+
+                </Table>
                 <Message>{Claims}</Message>
 
             </ClaimsContainer>
             <CreateNewClaimContainer>
                 <Button onClick={CreateNewClaim}>Create New Claim</Button>
             </CreateNewClaimContainer>
+
         </Container>
+
     );
 }
 
 export default ViewClaimsDashboard;
+
+// axios.get(url).then((res) => {
+//     // const data = res.json();
+//     const parsedData = JSON.parse(JSON.stringify(res.data))
+//     /*eslint no-undef: "off"*/
+//     console.log(parsedData)
+//     let claimsIds = "";
+//     for (let i = 0; i<parsedData.length; i++){
+//         claimsIds += "Claim Id:" + parsedData[i].claimId;
+//     }
+//     setClaims(claimsIds);
+//
+// });

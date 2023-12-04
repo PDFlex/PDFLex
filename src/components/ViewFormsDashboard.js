@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import * as PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom";
+import {ClaimContext, UserIdContext} from "../App";
 // import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
 
 const Container = styled.div`
@@ -111,10 +112,11 @@ const Button = styled.button`
 
 const ViewFormsDashboard = () => {
     const navigate = useNavigate();
-    let clientId = 1234;
-    let claimId = 1001;
     const url = 'http://localhost:8080/' + clientId + '/' + claimId +'/forms';
+    const {clientId, setClientId} = useContext(UserIdContext)
     const [Forms, setForms] = useState('');
+    const {claimId, setClaimId} = useContext(ClaimContext);
+
 
     axios.get(url).then((res) => {
         // const data = res.json();

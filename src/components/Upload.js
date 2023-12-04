@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import styled from 'styled-components';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import * as PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom"; // Allows us to redirect to other pages in the future
+import { useNavigate } from "react-router-dom";
+import {ClaimContext} from "../App"; // Allows us to redirect to other pages in the future
 
 const Container = styled.div`
     display: flex;
@@ -113,7 +114,7 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);
-        const claimId = 1010;
+        const {claimId, setClaimId} = useContext(ClaimContext);
         formData.append('claimId', claimId)
 
         const config = {

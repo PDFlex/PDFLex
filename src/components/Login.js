@@ -4,6 +4,8 @@ import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {UserIdContext} from "../App";
+
 
 const Container = styled.div`
     display: flex;
@@ -100,7 +102,7 @@ const Button = styled.button`
 `
 
 const Login = () => {
-    const [clientId, setClientId] = useState('');
+    const {clientId, setClientId} = useContext(UserIdContext)
     const [verificationMsg, setVerificationMsg] = useState('');
     const navigate = useNavigate();
 

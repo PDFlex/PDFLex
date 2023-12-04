@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
+import {ClaimContext} from "../App";
 
 const Container = styled.div`
     display: flex;
-    background-color: #ccebd1;
+    background-color: #bdd4bc;
 `
 
 const FormContainer = styled.form`
@@ -92,7 +93,7 @@ const Button = styled.button`
 
 const Form = () => {
     // CLAIM CHECKLIST
-    const [claimId, setClaimId] = useState('');
+    const {claimId, setClaimId} = useContext(ClaimContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
     const [attachedDeathCertificate, setAttachedDeathCertificate] = useState(false);
     const [completedClaimSubmission, setCompletedClaimSubmission] = useState(false);
@@ -167,7 +168,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080/form-info/post';
+        const url = 'http://159.203.24.109:8080/form-info/post';
         axios.post(url, form).then(() => {});
     }
 
