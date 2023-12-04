@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Container = styled.div`
     display: flex;
-    background-color: #bdd4bc;
+    background-color: #ccebd1;
 `
 
 const FormContainer = styled.form`
