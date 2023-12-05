@@ -168,7 +168,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080:form-info/' + toString(claimId.claimId);
+        const url = 'http://localhost:8080:form-info/' + claimId.claimId.toString();
         axios.post(url, form).then(() => {});
     }
 
