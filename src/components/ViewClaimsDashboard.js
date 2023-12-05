@@ -4,8 +4,7 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
 import React, { useContext } from 'react';
-import {ClaimContext, UserIdContext} from "../App";
-import ViewFormsDashboard from "./ViewFormsDashboard";
+import {UserIdContext} from "../App";
 
 const Container = styled.div`
     display: flex;
@@ -35,22 +34,6 @@ const Heading = styled.h1`
     margin-right: auto;
 `
 
-const Label = styled.label`
-    position: absolute;
-    top: 47%;
-    left: 10%;
-    font-size: 1.1em;
-    font-weight: 425;
-`
-
-const Message = styled.p`
-    position: absolute;
-    bottom: 24%;
-    left: 10%;
-    font-size: 0.9em;
-    color: #dc143c;
-`
-
 const Button = styled.button`
     height: 75%;
     margin-left: auto;
@@ -71,10 +54,9 @@ const Button = styled.button`
 
 const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
-    const url = 'http://localhost:8080/1234/claims';
-    const {clientId, setClientId} = useContext(UserIdContext)
-    const [Claims, setClaims] = useState('');
-    const {claimId, setClaimId} = useContext(ClaimContext);
+    const {clientId} = useContext(UserIdContext)
+    const {setClaimId} = useContext(UserIdContext);
+    const url = 'http://localhost:8080/'+ clientId.toString() + '/claims';
 
     const [tableData, setTableData] = useState([]);
     console.log(clientId);
@@ -93,8 +75,6 @@ const ViewClaimsDashboard = () => {
                     date: new Date()
                 };
                 newClaims.push(newElement);
-                // setTableData([...tableData, newElement]);
-                // document.select("tbody").insert("tr").html("<td>" + (parsedData[i].claimId) + "</td>" + "<td>" + (claimType) +  "</td>" + "<td>" + (parsedData[i].status) +  "</td>" +"<td>" + (new Date()) +  "</td>");
             }
             setTableData([...tableData, ...newClaims]);
 
@@ -105,31 +85,25 @@ const ViewClaimsDashboard = () => {
 
     function CreateNewClaim() {
         const basemessage = {
-            "clientId": 1234
+            "clientId": clientId.toString()
         }
         navigate('/SelectFillOrUpload');
 
         const url2 = 'http://localhost:8080/new-claim';
         axios.post(url2, basemessage).then(() => {} );
     }
-    function setClaimIdToInput(item){
-        setClaimId(item)
-        console.log(item.id)
-
-    }
-
     function renderTable(tableData) {
         return tableData.map(item => (
             <tr key={item.id}>
-                {/*Insert React Link inside the td surrounding item.id*/}
-                {/*<td><Link to={something}>{item.id}</Link></td>*/}
-                <td><a href="ViewFormsDashboard">{item.id}</a></td>
+                {/*TODO: Switch this to a be a URL parameter!*/}
+                {/* on click is the quick and dirty version*/}
+                <td>{item.id}</td>
                 <td>{item.claimType}</td>
                 <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
-
-
-                {/* Render other cells based on item properties */}
+                {/*TODO: Switch this to a be a URL parameter!*/}
+                {/* on click is the quick and dirty version*/}
+                <td><Link to={`/ViewFormsDashboard`}><Button onClick={() => {setClaimId(item.id)}}>View</Button></Link></td>
             </tr>
         ))
     }
@@ -142,7 +116,6 @@ const ViewClaimsDashboard = () => {
             </HeaderContainer>
 
             <ClaimsContainer>
-                <Label id={"claimsList"}></Label>
                 <Table className="table" cellPadding="10">
                     <thead>
                     <tr>
@@ -150,15 +123,15 @@ const ViewClaimsDashboard = () => {
                         <th scope="col" id="claimtype">Type</th>
                         <th scope="col" id="claimstatus">Status</th>
                         <th scope="col" id="date">Date Filed</th>
+                        <th scope="col" id="viewbutton"></th>
                     </tr>
                     </thead>
+
                     <tbody>
-                    {/* Mapping through tableData to render rows */}
                     {renderTable(tableData)}
                     </tbody>
 
                 </Table>
-                <Message>{Claims}</Message>
             </ClaimsContainer>
         </Container>
 

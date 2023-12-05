@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
-import {ClaimContext} from "../App";
+import {UserIdContext} from "../App";
 
 const Container = styled.div`
     display: flex;
@@ -93,7 +93,7 @@ const Button = styled.button`
 
 const Form = () => {
     // CLAIM CHECKLIST
-    const {claimId} = useContext(ClaimContext);
+    const {claimId} = useContext(UserIdContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
     const [attachedDeathCertificate, setAttachedDeathCertificate] = useState(false);
     const [completedClaimSubmission, setCompletedClaimSubmission] = useState(false);

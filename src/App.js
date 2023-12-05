@@ -10,43 +10,41 @@ import ViewFormsDashboard from "./components/ViewFormsDashboard";
 import {createContext, useState} from "react";
 
 
+
+
 // Create a context to hold the user ID
 export const UserIdContext = createContext({
     clientId: "",
-    setClientId:() => {}
-});
-export const ClaimContext = createContext({
+    setClientId:() => {},
     claimId: "",
     setClaimId:() => {}
 });
+
 
 function App() {
     const [clientId, setClientId] = useState('');
     const [claimId, setClaimId] = useState('');
 
+
     return (
         <div className="App">
-            <UserIdContext.Provider value={{clientId: clientId, setClientId: setClientId}}>
-                <ClaimContext.Provider value={{claimId: claimId, setClaimId: setClaimId}}>
-
+            <UserIdContext.Provider value={{clientId: clientId, setClientId: setClientId, claimId: claimId, setClaimId: setClaimId}}>
 
                 <Routes>
-                <Route path="/" element={<Login/>}></Route>;
-                {/* Create New Route here for each page (Create new Js file in components)
-                Use State sets default value */}
-                <Route path="/ViewClaimsDashboard" element={<ViewClaimsDashboard/>}></Route>;
-                <Route path="/SelectFillOrUpload" element={<SelectFillOrUpload/>}></Route>;
-                <Route path="/Upload" element={<Upload/>}></Route>;
-                <Route path="/Form" element={<Form/>}></Route>;
-                <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
-                <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
-            </Routes>
-            </ClaimContext.Provider>
+                    <Route path="/" element={<Login/>}></Route>;
+                    {/* Create New Route here for each page (Create new Js file in components)
+               Use State sets default value */}
+                    <Route path="/ViewClaimsDashboard" element={<ViewClaimsDashboard/>}></Route>;
+                    <Route path="/SelectFillOrUpload" element={<SelectFillOrUpload/>}></Route>;
+                    <Route path="/Upload" element={<Upload/>}></Route>;
+                    <Route path="/Form" element={<Form/>}></Route>;
+                    <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
+                    <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
+                </Routes>
             </UserIdContext.Provider>
-
         </div>
-
-);
+    );
 }
+
 
 export default App;

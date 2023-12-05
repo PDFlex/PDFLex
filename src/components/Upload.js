@@ -1,4 +1,4 @@
-import {ClaimContext} from "../App";
+import {UserIdContext} from "../App";
 import { useState, useContext } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import styled from 'styled-components';
@@ -69,7 +69,7 @@ const Button = styled.button`
 const Upload = () => {
     const [file, setFile] = useState(null);
     const [numPages, setNumPages] = useState();
-    const {claimId} = useContext(ClaimContext);
+    const {claimId} = useContext(UserIdContext);
     const navigate = useNavigate();
 
     function onDocumentLoadSuccess({numPages}) {

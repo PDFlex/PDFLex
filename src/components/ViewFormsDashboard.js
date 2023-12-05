@@ -4,7 +4,7 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
 import React, { useContext } from 'react';
-import {ClaimContext, UserIdContext} from "../App";
+import {UserIdContext} from "../App";
 
 const Container = styled.div`
     display: flex;
@@ -34,22 +34,6 @@ const Heading = styled.h1`
     margin-right: auto;
 `
 
-const Label = styled.label`
-    position: absolute;
-    top: 47%;
-    left: 10%;
-    font-size: 1.1em;
-    font-weight: 425;
-`
-
-const Message = styled.p`
-    position: absolute;
-    bottom: 24%;
-    left: 10%;
-    font-size: 0.9em;
-    color: #dc143c;
-`
-
 const Button = styled.button`
     height: 75%;
     margin-left: auto;
@@ -71,45 +55,45 @@ const Button = styled.button`
 const ViewFormsDashboard = () => {
     const navigate = useNavigate();
     const {clientId} = useContext(UserIdContext)
-    const [Forms] = useState('');
-    const {claimId} = useContext(ClaimContext);
-    console.log(clientId)
-    console.log(claimId)
-    // const url = 'http://localhost:8080/' + clientId.clientId.toString() + '/' + claimId.claimId.toString() +'/forms';
+    const {claimId} = useContext(UserIdContext);
+
     const [tableData, setTableData] = useState([]);
 
+    useEffect(() => {
+        const url = 'http://localhost:8080/' + clientId.toString() + '/' + claimId.toString() +'/forms';
 
-    // axios.get(url).then((res) => {
-    //     // const data = res.json();
-    //     const parsedData = JSON.parse(JSON.stringify(res.data))
-    //     let forms = [];
-    //     const formType = "Life Claim Information Request";
+        axios.get(url).then((res) => {
+            // const data = res.json();
+            const parsedData = JSON.parse(JSON.stringify(res.data))
+            console.log(parsedData)
+            let forms = [];
+            const formType = "Life Claim Information Request";
+
+            for (let i = 0; i < parsedData.length; i++) {
+                const newElement = {
+                    id: parsedData[i].formId,
+                    formType: formType,
+                    status: parsedData[i].status,
+                    date: new Date()
+                };
+                forms.push(newElement);
+            }
+            setTableData([...tableData, ...forms]);
 
 
-    //     for (let i = 0; i < parsedData.length; i++) {
-    //         const newElement = {
-    //             id: parsedData[i].formId, // Example: incrementing ID
-    //             claimType: formType, // Example: generating a name
-    //             status: parsedData[i].status,
-    //             date: new Date()
-    //         };
-    //         forms.push(newElement);
-    //     }
-    //     setTableData([...tableData, ...forms]);
+        });
+    }, [clientId, claimId]);
 
-    // });
+
+
     function renderTable(tableData) {
         return tableData.map(item => (
             <tr key={item.id}>
-                {/*Insert React Link inside the td surrounding item.id*/}
-                {/*<td><Link to={something}>{item.id}</Link></td>*/}
                 <td><a href="">{item.id}</a></td>
-                {/*TODO: Add a form view page*/}
-                <td>{item.claimType}</td>
+                <td>{item.formType}</td>
                 <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
-
-                {/* Render other cells based on item properties */}
+                {/*TODO: Add a form view page*/}
             </tr>
         ))
 
@@ -123,16 +107,17 @@ const ViewFormsDashboard = () => {
         <Container>
             <HeaderContainer>
                 <Heading>Form Dashboard</Heading>
+                <Button onClick={BackToClaimsDashboard}>Back to Claims</Button>
+
             </HeaderContainer>
 
             <ClaimsContainer>
-                <Label id={"claimsList"}></Label>
                 <Table className="table" cellPadding="10">
                     <thead>
                     <tr>
                         <th scope="col" id="Id">Id</th>
-                        <th scope="col" id="claimtype">Type</th>
-                        <th scope="col" id="claimstatus">Status</th>
+                        <th scope="col" id="formtype">Type</th>
+                        <th scope="col" id="formstatus">Status</th>
                         <th scope="col" id="date">Date Filed</th>
                     </tr>
                     </thead>
@@ -142,7 +127,7 @@ const ViewFormsDashboard = () => {
                     </tbody>
 
                 </Table>
-                <Message>{Forms}</Message>
+
             </ClaimsContainer>
         </Container>
     );
