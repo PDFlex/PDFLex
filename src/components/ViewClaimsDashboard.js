@@ -66,6 +66,7 @@ const ViewClaimsDashboard = () => {
             const parsedData = JSON.parse(JSON.stringify(res.data))
             let claimType = "Life Claim";
             const newClaims = [];
+            console.log(parsedData)
 
             for (let i = 0; i < parsedData.length; i++) {
                 const newElement = {

@@ -89,10 +89,12 @@ const ViewFormsDashboard = () => {
     function renderTable(tableData) {
         return tableData.map(item => (
             <tr key={item.id}>
-                <td><a href="">{item.id}</a></td>
+                <td>{item.id}</td>
                 <td>{item.formType}</td>
                 <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
+                <td><Link to={`/ViewForm`}><Button>>View</Button></Link></td>
+
                 {/*TODO: Add a form view page*/}
             </tr>
         ))
