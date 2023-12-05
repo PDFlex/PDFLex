@@ -22,12 +22,15 @@ export const ClaimContext = createContext({
 
 function App() {
     const [clientId, setClientId] = useState('');
+    const [claim, setClaim] = useState('');
 
     return (
         <div className="App">
             <UserIdContext.Provider value={{clientId: clientId, setClientId: setClientId}}>
+                <ClaimContext.Provider value={{claim: claim, setClaim: setClaim}}>
 
-            <Routes>
+
+                <Routes>
                 <Route path="/" element={<Login/>}></Route>;
                 {/* Create New Route here for each page (Create new Js file in components)
                 Use State sets default value */}
@@ -38,7 +41,8 @@ function App() {
                 <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
                 <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
             </Routes>
-            </UserIdContext.Provider>
+            </ClaimContext.Provider>
+                </UserIdContext.Provider>
 
         </div>
 

@@ -157,7 +157,7 @@ const Form = () => {
         }
         
         const form = {
-            claimId, completedDeathCertificate, attachedDeathCertificate, completedClaimSubmission,
+            completedDeathCertificate, attachedDeathCertificate, completedClaimSubmission,
             deceasedName, dateOfBirth, dateOfDeath,
             causeOfDeath, deceasedHospitalized, hospitalizationDate, hospitalName, hospitalAddress,
             attendingPhysicianName, attendingPhysicianAddress, attendingPhysicianContactNumber,
@@ -168,7 +168,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://159.203.24.109:8080/form-info/post';
+        const url = 'http://localhost:8080:form-info/' + claimId.claimId;
         axios.post(url, form).then(() => {});
     }
 
@@ -180,8 +180,6 @@ const Form = () => {
                 {/* CLAIM CHECKLIST */}
                 <Section>
                     <Heading> Claim Checklist </Heading>
-                    <Label span = {2}> Claim ID </Label>
-                    <Input type="number" span = {2} value={claimId} onChange={(e) => setClaimId(e.target.value)}/>
 
                     <Label span = {2}>
                         <Input type="checkbox" span = {2} value={completedDeathCertificate} onChange={(e) => setCompletedDeathCertificate(true)}/>
