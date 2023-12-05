@@ -32,29 +32,27 @@ const RightContainer = styled.div`
 `
 
 const UploadForm = styled.form`
+    margin: 4rem;
 `   
 
 const Heading = styled.h1`
-    margin: 2rem;
     font-size: 3em;
     color: #0C9644;
 `
 
 const Text = styled.p`
     display: block;
-    margin: 2rem;
-    font-size: 1.3em;
-    margin: 0 0 6rem;
+    font-size: 1em;
 `
 
 const Input = styled.input`
-    margin: 2rem;   
+    margin: 2rem 0;
 `
 
 const Button = styled.button` 
     display: block;
     background-color: #56BD66;
-    margin: 2rem;
+    margin: 2rem 0;
     padding: 0.5rem 2rem;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 0.3em;
@@ -71,7 +69,6 @@ const Button = styled.button`
 const Upload = () => {
     const [file, setFile] = useState(null);
     const [numPages, setNumPages] = useState();
-    const [pageNumber, setPageNumber] = useState(1);
     const {claimId} = useContext(ClaimContext);
     const navigate = useNavigate();
 
@@ -104,6 +101,9 @@ const Upload = () => {
             <LeftContainer>
                 <UploadForm onSubmit={handleSubmit}>
                     <Heading>Upload and Submit</Heading>
+                    <Text>Upon submission of the PDF, you will be prompted to review the information provided
+                        to ensure that it was processed correctly.
+                    </Text>
                     <Input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}/>
                     <Button>Submit</Button>
                 </UploadForm>

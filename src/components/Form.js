@@ -93,7 +93,7 @@ const Button = styled.button`
 
 const Form = () => {
     // CLAIM CHECKLIST
-    const {claimId, setClaimId} = useContext(ClaimContext);
+    const {claimId} = useContext(ClaimContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
     const [attachedDeathCertificate, setAttachedDeathCertificate] = useState(false);
     const [completedClaimSubmission, setCompletedClaimSubmission] = useState(false);
