@@ -4,12 +4,13 @@ import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
 import axios from "axios";
 import * as PropTypes from "prop-types";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
 // import { useNavigate } from "react-router-dom"; Allows us to redirect to other pages in the future
 import React, { useContext } from 'react';
 // import {UserIdProvider, UserProfile } from './Login'
-import {UserIdContext} from "../App";
+import {ClaimContext, UserIdContext} from "../App";
+import ViewFormsDashboard from "./ViewFormsDashboard";
 
 const Container = styled.div`
     display: flex;
@@ -118,6 +119,8 @@ const ViewClaimsDashboard = () => {
     const url = 'http://localhost:8080/1234/claims';
     const {clientId, setClientId} = useContext(UserIdContext)
     const [Claims, setClaims] = useState('');
+    const {claimId, setClaimId} = useContext(ClaimContext);
+
     const [tableData, setTableData] = useState([]);
     console.log(clientId);
 
@@ -131,7 +134,7 @@ const ViewClaimsDashboard = () => {
                 const newElement = {
                     id: parsedData[i].claimId, // Example: incrementing ID
                     claimType: claimType, // Example: generating a name
-                    // status: parsedData[i].status,
+                    status: parsedData[i].status,
                     date: new Date()
                 };
                 newClaims.push(newElement);
@@ -151,9 +154,13 @@ const ViewClaimsDashboard = () => {
         }
         navigate('/SelectFillOrUpload');
 
-
         const url2 = 'http://localhost:8080/new-claim';
         axios.post(url2, basemessage).then(() => {} );
+    }
+    function setClaimIdToInput(item){
+        setClaimId(item)
+        console.log(item.id)
+
     }
 
     function renderTable(tableData) {
@@ -161,16 +168,15 @@ const ViewClaimsDashboard = () => {
             <tr key={item.id}>
                 {/*Insert React Link inside the td surrounding item.id*/}
                 {/*<td><Link to={something}>{item.id}</Link></td>*/}
-                <td>{item.id}</td>
+                <td><a href="ViewFormsDashboard">{item.id}</a></td>
                 <td>{item.claimType}</td>
-                {/*<td>{item.status}</td>*/}
+                <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
 
 
                 {/* Render other cells based on item properties */}
             </tr>
         ))
-
     }
 
     return (
@@ -208,16 +214,3 @@ const ViewClaimsDashboard = () => {
 }
 
 export default ViewClaimsDashboard;
-
-// axios.get(url).then((res) => {
-//     // const data = res.json();
-//     const parsedData = JSON.parse(JSON.stringify(res.data))
-//     /*eslint no-undef: "off"*/
-//     console.log(parsedData)
-//     let claimsIds = "";
-//     for (let i = 0; i<parsedData.length; i++){
-//         claimsIds += "Claim Id:" + parsedData[i].claimId;
-//     }
-//     setClaims(claimsIds);
-//
-// });

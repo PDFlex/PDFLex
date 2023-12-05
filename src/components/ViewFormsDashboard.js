@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
@@ -112,24 +112,50 @@ const Button = styled.button`
 
 const ViewFormsDashboard = () => {
     const navigate = useNavigate();
-    const url = 'http://localhost:8080/' + clientId + '/' + claimId +'/forms';
-    const {clientId, setClientId} = useContext(UserIdContext)
-    const [Forms, setForms] = useState('');
-    const {claimId, setClaimId} = useContext(ClaimContext);
+    const {clientId} = useContext(UserIdContext)
+    const [Forms] = useState('');
+    const {claimId} = useContext(ClaimContext);
+    console.log(clientId)
+    console.log(claimId)
+    const url = 'http://localhost:8080/' + clientId.clientId.toString() + '/' + claimId.claimId.toString() +'/forms';
+    const [tableData, setTableData] = useState([]);
 
 
     axios.get(url).then((res) => {
         // const data = res.json();
         const parsedData = JSON.parse(JSON.stringify(res.data))
-        /*eslint no-undef: "off"*/
-        console.log(parsedData)
-        let formIds = "";
-        for (let i = 0; i<parsedData.length; i++){
-            formIds += "Form Id:" + parsedData[i].formId;
+        let forms = [];
+        const formType = "Life Claim Information Request";
+
+
+        for (let i = 0; i < parsedData.length; i++) {
+            const newElement = {
+                id: parsedData[i].formId, // Example: incrementing ID
+                claimType: formType, // Example: generating a name
+                status: parsedData[i].status,
+                date: new Date()
+            };
+            forms.push(newElement);
         }
-        setForms(formIds);
+        setTableData([...tableData, ...forms]);
 
     });
+    function renderTable(tableData) {
+        return tableData.map(item => (
+            <tr key={item.id}>
+                {/*Insert React Link inside the td surrounding item.id*/}
+                {/*<td><Link to={something}>{item.id}</Link></td>*/}
+                <td><a href="">{item.id}</a></td>
+                {/*TODO: Add a form view page*/}
+                <td>{item.claimType}</td>
+                <td>{item.status}</td>
+                <td>{item.date.toString()}</td>
+
+                {/* Render other cells based on item properties */}
+            </tr>
+        ))
+
+    }
     function BackToClaimsDashboard() {
         navigate('/ViewClaimsDashboard');
     }

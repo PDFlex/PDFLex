@@ -22,12 +22,12 @@ export const ClaimContext = createContext({
 
 function App() {
     const [clientId, setClientId] = useState('');
-    const [claim, setClaim] = useState('');
+    const [claimId, setClaimId] = useState('');
 
     return (
         <div className="App">
             <UserIdContext.Provider value={{clientId: clientId, setClientId: setClientId}}>
-                <ClaimContext.Provider value={{claim: claim, setClaim: setClaim}}>
+                <ClaimContext.Provider value={{claimId: claimId, setClaimId: setClaimId}}>
 
 
                 <Routes>
@@ -42,7 +42,7 @@ function App() {
                 <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
             </Routes>
             </ClaimContext.Provider>
-                </UserIdContext.Provider>
+            </UserIdContext.Provider>
 
         </div>
 
