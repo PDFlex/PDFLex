@@ -82,7 +82,7 @@ const ViewFormsDashboard = () => {
 
 
         });
-    }, [clientId, claimId]);
+    }, [clientId, claimId, tableData]);
 
 
 
@@ -93,7 +93,7 @@ const ViewFormsDashboard = () => {
                 <td>{item.formType}</td>
                 <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
-                <td><Link to={`/ViewForm`}><Button>>View</Button></Link></td>
+                <td><Link to={`/ViewForm`}><Button>View</Button></Link></td>
 
                 {/*TODO: Add a form view page*/}
             </tr>
