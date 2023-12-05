@@ -84,13 +84,15 @@ const ViewClaimsDashboard = () => {
 
 
     function CreateNewClaim() {
-        const basemessage = {
+        const baseMessage = {
             "clientId": clientId.toString()
         }
         navigate('/SelectFillOrUpload');
 
         const url2 = 'http://localhost:8080/new-claim';
-        axios.post(url2, basemessage).then(() => {} );
+        axios.post(url2, baseMessage).then((res) => {
+            setClaimId(JSON.parse(JSON.stringify(res.data)))
+        } );
     }
     function renderTable(tableData) {
         return tableData.map(item => (
