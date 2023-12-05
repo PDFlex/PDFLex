@@ -1,112 +1,74 @@
-import React, {useContext, useState} from "react";
+import {ClaimContext} from "../App";
+import { useState, useContext } from 'react';
+import { pdfjs, Document, Page } from 'react-pdf';
+import resume from './resume.pdf';
 import styled from 'styled-components';
-import backgroundImage from '../images/login-background.jpg';
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import axios from "axios";
-import * as PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import {ClaimContext} from "../App"; // Allows us to redirect to other pages in the future
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     height: 100vh;
-    background-image: url(${backgroundImage});
-    background-size: cover;
-
-`
-const UploadContainer = styled.div`
-    position: relative;
-    width: 40%;
-    height: 60%;
-    margin: auto;
-    box-shadow: 0 0 2rem 0.5rem black;
-    border-radius: 1rem;
-    background-color: #fbfaf2;
-`
-const Logo = styled.img`
-    position: absolute;
-    top: 5%;
-    left: 15%;
-    display: block;
-    width: 70%;
 `
 
-const Text = styled.h3`
-    position: absolute;
-    top: 30%;
-    left: 10%;
-    display: block;
-    font-size: 2.2rem;
+const GridContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border: solid;
 `
 
-const Label = styled.label`
-    position: absolute;
-    top: 47%;
-    left: 10%;
-    font-size: 1.1em;
-    font-weight: 425;
+const UploadForm = styled.form`
+`   
+
+const Heading = styled.h1`
+    margin: 2rem;
+    font-size: 3em;
+    color: #0C9644;
+`
+
+const Text = styled.p`
+    margin: 2rem;
+    font-size: 1.3em;
+    margin: 0 0 6rem;
 `
 
 const Input = styled.input`
-    position: absolute;
-    top: 52%;
-    left: 10%;
-    display: block;
-    width: 80%;
-    padding: 0.8rem 1rem;
-    margin: 0.5rem 0;
-    border: 0.05rem solid #ccc;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    &:focus {
-        outline: 0.1rem solid #11a346;
-    }
-    &::-webkit-inner-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    } 
-    &::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
+    margin: 2rem;
 `
 
-const Message = styled.p`
-    position: absolute;
-    bottom: 24%;
-    left: 10%;
-    font-size: 0.9em;
-    color: #dc143c;
-`
-
-const Button = styled.button`
-    position: absolute;
-    bottom: 10%;
-    right: 10%;
+const Button = styled.button` 
     display: block;
+    background-color: #56BD66;
+    margin: 2rem;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
-    border-radius: 1.5em;
-    background-color: #11a346;
+    border-radius: 0.3em;
     border: none;
-    padding: 1% 4%;
-    font-size: 1.4em;
+    font-size: 1.5em;
     text-align: center;
     text-decoration: none;
     color: white;
     &:hover{
-        background-color: #0c7c44;
+        background-color: #4daa5b;
     }
 `
 
 const Upload = () => {
-    const [file, setFile] = useState()
+    const [file, setFile] = useState(null);
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
+    const {claimId} = useContext(ClaimContext);
     const navigate = useNavigate();
 
-
-    function handleChange(event) {
-        setFile(event.target.files[0])
-    }
+    function onDocumentLoadSuccess({numPages}) {
+        setNumPages(numPages);
+      }
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -114,13 +76,11 @@ const Upload = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);
-        const {claimId, setClaimId} = useContext(ClaimContext);
         formData.append('claimId', claimId)
 
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-
             },
         };
 
@@ -132,16 +92,22 @@ const Upload = () => {
 
     return (
         <Container>
-            <UploadContainer>
-                <div className="upload">
-                    <form onSubmit={handleSubmit}>
-                        <Text>Submit Life Claim Form</Text>
-                        <Input type="file" onChange={handleChange}/>
-                        <Button type="submit">Upload</Button>
-                    </form>
-                </div>
-            </UploadContainer>
+            <GridContainer>
+                <UploadForm onSubmit={handleSubmit}>
+                    <Heading>Upload and Submit</Heading>
+                    <Input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}/>
+                    <Button>Submit</Button>
+                </UploadForm>
+
+            </GridContainer>
+            <GridContainer>
+                <Document file={resume} onLoadSuccess={onDocumentLoadSuccess}>
+                    <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} scale={0.7}/>
+                </Document>
+                <Text>Page {pageNumber} of {numPages}</Text>
+            </GridContainer>
         </Container>
     );
 }
+ 
 export default Upload;
