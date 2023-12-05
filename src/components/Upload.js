@@ -1,7 +1,6 @@
 import {ClaimContext} from "../App";
 import { useState, useContext } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
-import resume from './resume.pdf';
 import styled from 'styled-components';
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import axios from "axios";
@@ -10,18 +9,26 @@ import { useNavigate } from "react-router-dom";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 const Container = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     height: 100vh;
 `
 
-const GridContainer = styled.div`
+const LeftContainer = styled.div`
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    border: solid;
+`
+
+const RightContainer = styled.div`
+    flex: 1;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    border-left: solid #56BD66;
 `
 
 const UploadForm = styled.form`
@@ -34,19 +41,21 @@ const Heading = styled.h1`
 `
 
 const Text = styled.p`
+    display: block;
     margin: 2rem;
     font-size: 1.3em;
     margin: 0 0 6rem;
 `
 
 const Input = styled.input`
-    margin: 2rem;
+    margin: 2rem;   
 `
 
 const Button = styled.button` 
     display: block;
     background-color: #56BD66;
     margin: 2rem;
+    padding: 0.5rem 2rem;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 0.3em;
     border: none;
@@ -92,20 +101,25 @@ const Upload = () => {
 
     return (
         <Container>
-            <GridContainer>
+            <LeftContainer>
                 <UploadForm onSubmit={handleSubmit}>
                     <Heading>Upload and Submit</Heading>
                     <Input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}/>
                     <Button>Submit</Button>
                 </UploadForm>
 
-            </GridContainer>
-            <GridContainer>
-                <Document file={resume} onLoadSuccess={onDocumentLoadSuccess}>
-                    <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} scale={0.7}/>
+            </LeftContainer>    
+            <RightContainer>
+                <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+                    {Array.apply(null, Array(numPages))
+                        .map((x, i) => i + 1)
+                        .map((page) => {
+                            return (
+                                <Page pageNumber={page} renderTextLayer={false} renderAnnotationLayer={false}/>
+                            )
+                    })}
                 </Document>
-                <Text>Page {pageNumber} of {numPages}</Text>
-            </GridContainer>
+            </RightContainer>
         </Container>
     );
 }
