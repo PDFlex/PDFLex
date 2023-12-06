@@ -93,7 +93,6 @@ const ViewFormsDashboard = () => {
                     id: parsedData[i].formId,
                     formType: formType,
                     status: parsedData[i].status,
-                    date: new Date()
                 };
                 forms.push(newElement);
             }
@@ -111,7 +110,6 @@ const ViewFormsDashboard = () => {
                 <td>{item.id}</td>
                 <td>{item.formType}</td>
                 <td>{item.status}</td>
-                <td>{item.date.toString()}</td>
                 <td><Link to={`/ViewForm`}><HeaderButton>View</HeaderButton></Link></td>
 
                 {/*TODO: Add a form view page*/}
@@ -150,7 +148,6 @@ const ViewFormsDashboard = () => {
                         <th scope="col" id="Id">Id</th>
                         <th scope="col" id="formtype">Type</th>
                         <th scope="col" id="formstatus">Status</th>
-                        <th scope="col" id="date">Date Filed</th>
                     </tr>
                     </thead>
                     <tbody>

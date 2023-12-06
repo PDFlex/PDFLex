@@ -74,6 +74,7 @@ const ViewClaimsDashboard = () => {
                     claimType: claimType, // Example: generating a name
                     status: parsedData[i].status,
                     date: new Date()
+                    // date: parsedData[i].createdClaimDate
                 };
                 newClaims.push(newElement);
             }
