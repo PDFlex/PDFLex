@@ -15,6 +15,9 @@ const Container = styled.div`
 `
 
 const ClaimsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 80%;
     height: 80%;
 `
@@ -34,7 +37,7 @@ const Heading = styled.h1`
     margin-right: auto;
 `
 
-const Button = styled.button`
+const HeaderButton = styled.button`
     height: 75%;
     margin-left: auto;
     display: inline-block;
@@ -44,6 +47,23 @@ const Button = styled.button`
     border: none;
     padding: 0 1em;
     font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    &:hover{
+        background-color: #0c7c44;
+    }
+`
+
+const Button = styled.button`
+    display: inline-block;
+    box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
+    border-radius: 0.5em;
+    background-color: #11a346;
+    border: none;
+    padding: 0.5em 2em;
+    margin: 0 0 2rem;
+    font-size: 1.5em;
     text-align: center;
     text-decoration: none;
     color: white;
@@ -94,23 +114,27 @@ const ViewFormsDashboard = () => {
                 <td>{item.formType}</td>
                 <td>{item.status}</td>
                 <td>{item.date.toString()}</td>
-                <td><Link to={`/ViewForm`}><Button>View</Button></Link></td>
+                <td><Link to={`/ViewForm`}><HeaderButton>View</HeaderButton></Link></td>
 
                 {/*TODO: Add a form view page*/}
             </tr>
         ))
 
     }
+
     function BackToClaimsDashboard() {
         navigate('/ViewClaimsDashboard');
     }
 
+    function SubmitClaim() {
+        navigate('/ClaimSubmittedView');
+    }
 
     return (
         <Container>
             <HeaderContainer>
                 <Heading>Form Dashboard</Heading>
-                <Button onClick={BackToClaimsDashboard}>Back to Claims</Button>
+                <HeaderButton onClick={BackToClaimsDashboard}>Back to Claims</HeaderButton>
 
             </HeaderContainer>
 
@@ -130,8 +154,8 @@ const ViewFormsDashboard = () => {
                     </tbody>
 
                 </Table>
-
             </ClaimsContainer>
+            <Button onClick={SubmitClaim}>Submit Claim</Button>
         </Container>
     );
 }

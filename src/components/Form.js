@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import {UserIdContext} from "../App";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -92,6 +93,8 @@ const Button = styled.button`
 ` 
 
 const Form = () => {
+    const navigate = useNavigate();
+
     // CLAIM CHECKLIST
     const {claimId} = useContext(UserIdContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
@@ -170,6 +173,7 @@ const Form = () => {
 
         const url = 'http://localhost:8080/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {});
+        navigate('/ViewFormsDashboard');
     }
 
     return (

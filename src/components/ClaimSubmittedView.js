@@ -1,4 +1,3 @@
-// THIS SHOULD BE CLAIM-SUBMITTED-VIEW
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 
@@ -23,7 +22,7 @@ const Text = styled.p`
 const Button = styled.button` 
     margin: 1rem;
     padding: 1rem 2rem;
-    background-color: #56BD66;
+    background-color: #11a346;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 0.3em;
     border: none;
@@ -32,11 +31,11 @@ const Button = styled.button`
     text-decoration: none;
     color: white;
     &:hover{
-        background-color: #4daa5b;
+        background-color: #0c7c44;
     }
 `
 
-const FormSubmittedView = () => {
+const ClaimSubmittedView = () => {
     const navigate = useNavigate();
     
     return (
@@ -48,4 +47,4 @@ const FormSubmittedView = () => {
     );
 }
  
-export default FormSubmittedView;
+export default ClaimSubmittedView;

@@ -5,7 +5,7 @@ import ViewClaimsDashboard from "./components/ViewClaimsDashboard";
 import SelectFillOrUpload from "./components/SelectFillOrUpload";
 import Upload from "./components/Upload";
 import Form from "./components/Form";
-import FormSubmittedView from "./components/FormSubmittedView";
+import ClaimSubmittedView from "./components/ClaimSubmittedView";
 import ViewFormsDashboard from "./components/ViewFormsDashboard";
 import ViewForm from "./components/ViewForm";
 
@@ -40,7 +40,7 @@ function App() {
                     <Route path="/SelectFillOrUpload" element={<SelectFillOrUpload/>}></Route>;
                     <Route path="/Upload" element={<Upload/>}></Route>;
                     <Route path="/Form" element={<Form/>}></Route>;
-                    <Route path="/FormSubmittedView" element={<FormSubmittedView/>}></Route>;
+                    <Route path="/ClaimSubmittedView" element={<ClaimSubmittedView/>}></Route>;
                     <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
                     <Route path="/ViewForm" element={<ViewForm/>}></Route>;
 

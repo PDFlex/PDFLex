@@ -12,7 +12,7 @@ const Button = styled.button`
     width: 25rem;
     height: 15rem;
     margin: 2rem;
-    background-color: #56BD66;
+    background-color: #11a346;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 0.5em;
     border: none;
@@ -21,7 +21,7 @@ const Button = styled.button`
     text-decoration: none;
     color: white;
     &:hover{
-        background-color: #4daa5b; /* or #0C9644 */
+        background-color: #0c7c44;
     }
 `
 
