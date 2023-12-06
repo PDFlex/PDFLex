@@ -81,7 +81,8 @@ const ViewClaimsDashboard = () => {
 
 
         });
-    }, [clientId, tableData, url]);
+        // eslint-disable-next-line
+    }, [clientId, url]);
 
 
     function CreateNewClaim() {

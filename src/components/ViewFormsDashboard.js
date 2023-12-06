@@ -82,7 +82,8 @@ const ViewFormsDashboard = () => {
 
 
         });
-    }, [clientId, claimId, tableData]);
+        // eslint-disable-next-line
+    }, [clientId, claimId]);
 
 
 
