@@ -172,6 +172,22 @@ const Form = () => {
         axios.post(url, form).then(() => {});
     }
 
+
+    const url2 = 'http://localhost:8080/form-info/' + claimId;
+    axios.get(url2, claimId).then((res) => {
+        console.log(res);
+        setDeceasedName(res.data.deceasedName);
+        setDeceasedHospitalized(new Boolean(res.data.deceasedHospitalized));
+        setPastPhysicianNames(res.data.pastPhysicianNames);
+        // setDateOfDeath(res.data.dateOfDeath)
+        setDateOfDeath(new Date("2011-10-10T14:48:00.000+09:00"));
+
+
+
+
+
+    });
+
     return (
         <Container>
             <FormContainer onSubmit={handleSubmit}>
