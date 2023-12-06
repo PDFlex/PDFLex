@@ -173,14 +173,14 @@ const Form = () => {
     }
 
     useEffect(() => {
-        const url = 'http://localhost:8080/form-info/' + claimId.toString();
+        const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);
                 setCompletedClaimSubmission(res.data.completedClaimSubmission);
                 setDeceasedName(res.data.deceasedName);
-                setDateOfBirth(res.data.dateOfBirth);
-                setDateOfDeath(res.data.dateOfDeath);
+                setDateOfBirth(new Date(res.data.dateOfBirth));
+                setDateOfDeath(new Date(res.data.dateOfDeath));
                 setCauseOfDeath(res.data.causeOfDeath);
                 setDeceasedHospitalized(res.data.deceasedHospitalized);
                 setHospitalizationDate(res.data.hospitalizationDate);
@@ -211,21 +211,7 @@ const Form = () => {
                 setKinSignature(res.data.kinSignature);
                 setDateSigned(res.data.dateSigned)
 
-
-
-
-
-
-
-
-
             console.log(res);
-            setDeceasedName(res.data.deceasedName);
-            setDeceasedHospitalized(new Boolean(res.data.deceasedHospitalized));
-            setPastPhysicianNames(res.data.pastPhysicianNames);
-            // setDateOfDeath(res.data.dateOfDeath)
-            setDateOfDeath(new Date("2011-10-10T14:48:00.000+09:00"));
-
         });
     }, []);
 
@@ -325,7 +311,7 @@ const Form = () => {
                     <Label span = {1}> Occupation </Label>
                     <Label span = {1}> Date last worked </Label>
                     <Input type="text" span = {1} value={occupation} onChange={(e) => setOccupation(e.target.value)}/>
-                    <Input type="date" span = {1} value={dateLastWorked} onChange={(e) => setDateLastworked(e.target.value)}/>
+                    <Input type="date" span = {1} value={dateLastWorked} onChange={(e) => setDateLastWorked(e.target.value)}/>
 
                     <Label span = {2}> Employer </Label>
                     <Input type="text" span = {2} value={employer} onChange={(e) => setEmployer(e.target.value)}/>
