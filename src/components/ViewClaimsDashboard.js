@@ -81,7 +81,7 @@ const ViewClaimsDashboard = () => {
 
 
         });
-    }, [clientId, tableData, url]);
+    }, [clientId, url]);
 
 
     function CreateNewClaim() {

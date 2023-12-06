@@ -82,7 +82,7 @@ const ViewFormsDashboard = () => {
 
 
         });
-    }, [clientId, claimId, tableData]);
+    }, [clientId, claimId]);
 
 
 

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import {UserIdContext} from "../App";
@@ -130,7 +130,7 @@ const Form = () => {
 
     // EMPLOYMENT INFORMATION
     const [occupation, setOccupation] = useState('');
-    const [dateLastWorked, setDateLastworked] = useState(new Date());
+    const [dateLastWorked, setDateLastWorked] = useState(new Date());
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
     const [workContactNumber, setWorkContactNumber] = useState('');
@@ -168,25 +168,66 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080:form-info/' + claimId.claimId.toString();
+        const url = 'http://localhost:8080/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {});
     }
 
+    useEffect(() => {
+        const url = 'http://localhost:8080/form-info/' + claimId.toString();
+        axios.get(url, claimId).then((res) => {
+                setCompletedDeathCertificate(res.data.completedDeathCertificate);
+                setAttachedDeathCertificate(res.data.attachedDeathCertificate);
+                setCompletedClaimSubmission(res.data.completedClaimSubmission);
+                setDeceasedName(res.data.deceasedName);
+                setDateOfBirth(res.data.dateOfBirth);
+                setDateOfDeath(res.data.dateOfDeath);
+                setCauseOfDeath(res.data.causeOfDeath);
+                setDeceasedHospitalized(res.data.deceasedHospitalized);
+                setHospitalizationDate(res.data.hospitalizationDate);
+                setHospitalName(res.data.hospitalName);
+                setHospitalAddress(res.data.hospitalAddress);
+                setAttendingPhysicianName(res.data.attendingPhysicianName);
+                setAttendingPhysicianAddress(res.data.attendingPhysicianAddress);
+                setAttendingPhysicianContactNumber(res.data.attendingPhysicianContactNumber);
+                setFamilyPhysicianName(res.data.familyPhysicianName);
+                setFamilyPhysicianAddress(res.data.familyPhysicianAddress);
+                setFamilyPhysicianContactNumber(res.data.familyPhysicianContactNumber);
+                setPastPhysicianName1(res.data.pastPhysicianNames[0]);
+                setPastPhysicianName2(res.data.pastPhysicianNames[1]);
+                setPastPhysicianName3(res.data.pastPhysicianNames[2]);
+                setPastPhysicianAddress1(res.data.pastPhysicianAddresses[0]);
+                setPastPhysicianAddress2(res.data.pastPhysicianAddresses[1]);
+                setPastPhysicianAddress3(res.data.pastPhysicianAddresses[2]);
+                setOccupation(res.data.occupation);
+                setDateLastWorked(res.data.dateLastWorked);
+                setEmployer(res.data.employer);
+                setWorkAddress(res.data.workAddress);
+                setWorkContactNumber(res.data.workContactNumber);
+                // setReasonInsuredStoppedWorking(res.data.reasonInsuredStoppedWorking);
+                setNameOfKin(res.data.nameofKin);
+                setRelationshipToInsured(res.data.relationshipToInsured);
+                setKinAddress(res.data.kinAddress);
+                setKinContactNumber(res.data.kinContactNumber);
+                setKinSignature(res.data.kinSignature);
+                setDateSigned(res.data.dateSigned)
 
-    const url2 = 'http://localhost:8080/form-info/' + claimId;
-    axios.get(url2, claimId).then((res) => {
-        console.log(res);
-        setDeceasedName(res.data.deceasedName);
-        setDeceasedHospitalized(new Boolean(res.data.deceasedHospitalized));
-        setPastPhysicianNames(res.data.pastPhysicianNames);
-        // setDateOfDeath(res.data.dateOfDeath)
-        setDateOfDeath(new Date("2011-10-10T14:48:00.000+09:00"));
 
 
 
 
 
-    });
+
+
+
+            console.log(res);
+            setDeceasedName(res.data.deceasedName);
+            setDeceasedHospitalized(new Boolean(res.data.deceasedHospitalized));
+            setPastPhysicianNames(res.data.pastPhysicianNames);
+            // setDateOfDeath(res.data.dateOfDeath)
+            setDateOfDeath(new Date("2011-10-10T14:48:00.000+09:00"));
+
+        });
+    }, []);
 
     return (
         <Container>
