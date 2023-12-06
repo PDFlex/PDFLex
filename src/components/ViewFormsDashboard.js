@@ -131,8 +131,8 @@ const ViewFormsDashboard = () => {
 
         axios.get(url).then((res) => {
             setSubmitted(Boolean(res.data))
+            navigate('/ClaimSubmittedView');
         });
-        navigate('/ClaimSubmittedView');
     }
 
     return (
