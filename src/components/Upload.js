@@ -108,7 +108,7 @@ const Upload = () => {
                         to ensure that it was processed correctly.
                     </Text>
                     <Input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}/>
-                    {loading ? "Loading…": <Button>Submit</Button>}
+                    {loading ? <Button>Loading...</Button>: <Button>Submit</Button>}
                 </UploadForm>
 
             </LeftContainer>    

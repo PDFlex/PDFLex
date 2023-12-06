@@ -104,7 +104,7 @@ const ViewClaimsDashboard = () => {
                 <td>{item.id}</td>
                 <td>{item.claimType}</td>
                 <td>{item.status}</td>
-                <td>{item.date.toString()}</td>
+                <td>{item.date}</td>
                 {/*TODO: Switch this to a be a URL parameter!*/}
                 {/* on click is the quick and dirty version*/}
                 <td><Link to={`/ViewFormsDashboard`}><Button onClick={() => {setClaimId(item.id)}}>View</Button></Link></td>
