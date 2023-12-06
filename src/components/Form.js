@@ -219,6 +219,7 @@ const Form = () => {
 
             console.log(res);
         });
+    // eslint-disable-next-line
     }, []);
 
     return (
@@ -264,11 +265,11 @@ const Form = () => {
 
                     <Label span = {2}> Was deceased hospitalized?</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={(e) => setDeceasedHospitalized(true)}/>
+                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={() => setDeceasedHospitalized(true)}/>
                         Yes
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={(e) => setDeceasedHospitalized(false)}/>
+                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={() => setDeceasedHospitalized(false)}/>
                         No
                     </Label>
 

@@ -127,9 +127,6 @@ const Form = () => {
     const [pastPhysicianName3, setPastPhysicianName3] = useState('');
     const [pastPhysicianAddress3, setPastPhysicianAddress3] = useState('');
 
-    const pastPhysicianNames = [pastPhysicianName1, pastPhysicianName2, pastPhysicianName3];
-    const pastPhysicianAddresses = [pastPhysicianAddress1, pastPhysicianAddress2, pastPhysicianAddress3];
-
     // EMPLOYMENT INFORMATION
     const [occupation, setOccupation] = useState('');
     const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
@@ -189,6 +186,7 @@ const Form = () => {
 
             console.log(res);
         });
+    // eslint-disable-next-line
     }, []);
 
     function BackToFormsDashboard() {
@@ -239,11 +237,11 @@ const Form = () => {
 
                     <Label span = {2}> Was deceased hospitalized?</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={(e) => setDeceasedHospitalized(true)}/>
+                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={() => setDeceasedHospitalized(true)}/>
                         Yes
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={(e) => setDeceasedHospitalized(false)}/>
+                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={() => setDeceasedHospitalized(false)}/>
                         No
                     </Label>
 
@@ -304,23 +302,23 @@ const Form = () => {
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Normal retirement"} checked={reasonInsuredStoppedWorkingRadio === "Normal retirement"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Normal retirement")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Normal retirement"} checked={reasonInsuredStoppedWorkingRadio === "Normal retirement"} onChange={() => setReasonInsuredStoppedWorkingRadio("Normal retirement")}/>
                         Normal retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Disability retirement"} checked={reasonInsuredStoppedWorkingRadio === "Disability retirement"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Disability retirement")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Disability retirement"} checked={reasonInsuredStoppedWorkingRadio === "Disability retirement"} onChange={() => setReasonInsuredStoppedWorkingRadio("Disability retirement")}/>
                         Disability retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Illness"} checked={reasonInsuredStoppedWorkingRadio === "Illness"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Illness")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Illness"} checked={reasonInsuredStoppedWorkingRadio === "Illness"} onChange={() => setReasonInsuredStoppedWorkingRadio("Illness")}/>
                         Illness
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Death"} checked={reasonInsuredStoppedWorkingRadio === "Death"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Death")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Death"} checked={reasonInsuredStoppedWorkingRadio === "Death"} onChange={() => setReasonInsuredStoppedWorkingRadio("Death")}/>
                         Death
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Other")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={() => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
                     <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
