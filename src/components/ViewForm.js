@@ -5,96 +5,95 @@ import {UserIdContext} from "../App";
 import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
-    display: flex;
-    background-color: #bdd4bc;
+  display: flex;
+  background-color: #bdd4bc;
 `
 
 const FormContainer = styled.form`
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 15rem;
-    padding: 1.5rem 1.5rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem 0.05rem grey;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 15rem;
+  padding: 1.5rem 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0.05rem grey;
 `
 
 const Section = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem;
 `
 
 const Title = styled.h2`
-    align-self: center;
+  align-self: center;
 `
 
 const Heading = styled.h4`
-    grid-column: span 2;
+  grid-column: span 2;
 `
 
 const Label = styled.label`
-    grid-column: span ${props => props.span};
-    margin: 0.3rem 0.3rem 0;
+  grid-column: span ${props => props.span};
+  margin: 0.3rem 0.3rem 0;
 `
 
 const BoldedLabel = styled.label`
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 1rem 0.3rem 0.1rem;
-    grid-column: span 2;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 1rem 0.3rem 0.1rem;
+  grid-column: span 2;
 `
 
 const Input = styled.input`
-    padding: 0.5rem 1rem;
-    margin: 0.1rem 0.3rem 0.3rem;
-    border: 0.05rem solid #a9a9a9;
-    border-radius: 0.2rem;
-    box-sizing: border-box;
-    &:focus {
-        outline: 0.07rem solid #949494;
-    }
-    &::-webkit-inner-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    } 
-    &::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
-    grid-column: span ${props => props.span};
-    
+  padding: 0.5rem 1rem;
+  margin: 0.1rem 0.3rem 0.3rem;
+  border: 0.05rem solid #a9a9a9;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  &:focus {
+    outline: 0.07rem solid #949494;
+  }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  grid-column: span ${props => props.span};
+
 `
 
 const Paragraph = styled.p`
-    grid-column: span 2;
+  grid-column: span 2;
 `
 
 const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Button = styled.button`
-    box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
-    border-radius: 1.5em;
-    background-color: #11a346;
-    border: none;
-    margin: 1rem;
-    padding: 1% 2%;
-    font-size: 1.3em;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    &:hover{
-        background-color: #0c7c44;
-    }
-` 
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
+  border-radius: 1.5em;
+  background-color: #11a346;
+  border: none;
+  margin: 1rem;
+  padding: 1% 2%;
+  font-size: 1.3em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  &:hover{
+    background-color: #0c7c44;
+  }
+`
 
 const Form = () => {
     const navigate = useNavigate();
-
     // CLAIM CHECKLIST
     const {claimId} = useContext(UserIdContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
@@ -128,9 +127,6 @@ const Form = () => {
     const [pastPhysicianName3, setPastPhysicianName3] = useState('');
     const [pastPhysicianAddress3, setPastPhysicianAddress3] = useState('');
 
-    const pastPhysicianNames = [pastPhysicianName1, pastPhysicianName2, pastPhysicianName3];
-    const pastPhysicianAddresses = [pastPhysicianAddress1, pastPhysicianAddress2, pastPhysicianAddress3];
-
     // EMPLOYMENT INFORMATION
     const [occupation, setOccupation] = useState('');
     const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
@@ -148,85 +144,61 @@ const Form = () => {
     const [kinSignature, setKinSignature] = useState('');
     const [dateSigned, setDateSigned] = useState(new Date().toISOString().split('T')[0]);
 
-    // Function that sends the form information to the backend
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        let reasonInsuredStoppedWorking = '';
-
-        if (reasonInsuredStoppedWorkingRadio === 'Other') {
-            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingOther;
-        } else {
-            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingRadio;
-        }
-        
-        const form = {
-            completedDeathCertificate, attachedDeathCertificate, completedClaimSubmission,
-            deceasedName, dateOfBirth, dateOfDeath,
-            causeOfDeath, deceasedHospitalized, hospitalizationDate, hospitalName, hospitalAddress,
-            attendingPhysicianName, attendingPhysicianAddress, attendingPhysicianContactNumber,
-            familyPhysicianName, familyPhysicianAddress, familyPhysicianContactNumber,
-            pastPhysicianNames, pastPhysicianAddresses,
-            occupation, dateLastWorked, employer,
-            workAddress, workContactNumber, reasonInsuredStoppedWorking,
-            nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
-        };
-
-        const url = 'http://localhost:8080/form-info/' + claimId.toString();
-        axios.post(url, form).then(() => {
-            navigate('/ViewFormsDashboard');
-        });
-
-    }
-
+    // Function that retrieves the form information from the backend
     useEffect(() => {
         const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
         axios.get(url, claimId).then((res) => {
-                setCompletedDeathCertificate(res.data.completedDeathCertificate);
-                setAttachedDeathCertificate(res.data.attachedDeathCertificate);
-                setCompletedClaimSubmission(res.data.completedClaimSubmission);
-                setDeceasedName(res.data.deceasedName);
-                setDateOfBirth(res.data.dateOfBirth);
-                setDateOfDeath(res.data.dateOfDeath);
-                setCauseOfDeath(res.data.causeOfDeath);
-                setDeceasedHospitalized(res.data.deceasedHospitalized);
-                setHospitalizationDate(res.data.hospitalizationDate);
-                setHospitalName(res.data.hospitalName);
-                setHospitalAddress(res.data.hospitalAddress);
-                setAttendingPhysicianName(res.data.attendingPhysicianName);
-                setAttendingPhysicianAddress(res.data.attendingPhysicianAddress);
-                setAttendingPhysicianContactNumber(res.data.attendingPhysicianContactNumber);
-                setFamilyPhysicianName(res.data.familyPhysicianName);
-                setFamilyPhysicianAddress(res.data.familyPhysicianAddress);
-                setFamilyPhysicianContactNumber(res.data.familyPhysicianContactNumber);
-                setPastPhysicianName1(res.data.pastPhysicianNames[0]);
-                setPastPhysicianName2(res.data.pastPhysicianNames[1]);
-                setPastPhysicianName3(res.data.pastPhysicianNames[2]);
-                setPastPhysicianAddress1(res.data.pastPhysicianAddresses[0]);
-                setPastPhysicianAddress2(res.data.pastPhysicianAddresses[1]);
-                setPastPhysicianAddress3(res.data.pastPhysicianAddresses[2]);
-                setOccupation(res.data.occupation);
-                setDateLastWorked(res.data.dateLastWorked);
-                setEmployer(res.data.employer);
-                setWorkAddress(res.data.workAddress);
-                setWorkContactNumber(res.data.workContactNumber);
-                setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
-                setNameOfKin(res.data.nameofKin);
-                setRelationshipToInsured(res.data.relationshipToInsured);
-                setKinAddress(res.data.kinAddress);
-                setKinContactNumber(res.data.kinContactNumber);
-                setKinSignature(res.data.kinSignature);
-                setDateSigned(res.data.dateSigned)
+            setCompletedDeathCertificate(res.data.completedDeathCertificate);
+            setAttachedDeathCertificate(res.data.attachedDeathCertificate);
+            setCompletedClaimSubmission(res.data.completedClaimSubmission);
+            setDeceasedName(res.data.deceasedName);
+            setDateOfBirth(res.data.dateOfBirth);
+            setDateOfDeath(res.data.dateOfDeath);
+            setCauseOfDeath(res.data.causeOfDeath);
+            setDeceasedHospitalized(res.data.deceasedHospitalized);
+            setHospitalizationDate(res.data.hospitalizationDate);
+            setHospitalName(res.data.hospitalName);
+            setHospitalAddress(res.data.hospitalAddress);
+            setAttendingPhysicianName(res.data.attendingPhysicianName);
+            setAttendingPhysicianAddress(res.data.attendingPhysicianAddress);
+            setAttendingPhysicianContactNumber(res.data.attendingPhysicianContactNumber);
+            setFamilyPhysicianName(res.data.familyPhysicianName);
+            setFamilyPhysicianAddress(res.data.familyPhysicianAddress);
+            setFamilyPhysicianContactNumber(res.data.familyPhysicianContactNumber);
+            setPastPhysicianName1(res.data.pastPhysicianNames[0]);
+            setPastPhysicianName2(res.data.pastPhysicianNames[1]);
+            setPastPhysicianName3(res.data.pastPhysicianNames[2]);
+            setPastPhysicianAddress1(res.data.pastPhysicianAddresses[0]);
+            setPastPhysicianAddress2(res.data.pastPhysicianAddresses[1]);
+            setPastPhysicianAddress3(res.data.pastPhysicianAddresses[2]);
+            setOccupation(res.data.occupation);
+            setDateLastWorked(res.data.dateLastWorked);
+            setEmployer(res.data.employer);
+            setWorkAddress(res.data.workAddress);
+            setWorkContactNumber(res.data.workContactNumber);
+            setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
+            setNameOfKin(res.data.nameofKin);
+            setRelationshipToInsured(res.data.relationshipToInsured);
+            setKinAddress(res.data.kinAddress);
+            setKinContactNumber(res.data.kinContactNumber);
+            setKinSignature(res.data.kinSignature);
+            setDateSigned(res.data.dateSigned)
 
             console.log(res);
         });
     // eslint-disable-next-line
     }, []);
 
+    function BackToFormsDashboard() {
+        navigate('/ViewFormsDashboard');
+    }
+
+
     return (
         <Container>
-            <FormContainer onSubmit={handleSubmit}>
-            <Title>Life Claim Information Request</Title>
-                
+            <FormContainer>
+                <Title>Life Claim Information Request</Title>
+
                 {/* CLAIM CHECKLIST */}
                 <Section>
                     <Heading> Claim Checklist </Heading>
@@ -388,13 +360,13 @@ const Form = () => {
                     <Input type="text" span = {1} value={kinSignature} onChange={(e) => setKinSignature(e.target.value)}/>
                     <Input type="date" span = {1} value={dateSigned} onChange={(e) => setDateSigned(e.target.value)}/>
                 </Section>
-
                 <ButtonContainer>
-                    <Button>Submit form</Button>
+                    <Button onClick={BackToFormsDashboard}>Back to Form Dashboard</Button>
                 </ButtonContainer>
+
             </FormContainer>
         </Container>
     );
 }
- 
+
 export default Form;
