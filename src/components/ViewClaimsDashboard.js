@@ -73,8 +73,7 @@ const ViewClaimsDashboard = () => {
                     id: parsedData[i].claimId, // Example: incrementing ID
                     claimType: claimType, // Example: generating a name
                     status: parsedData[i].status,
-                    date: new Date()
-                    // date: parsedData[i].createdClaimDate
+                    date: parsedData[i].createdClaimDate
                 };
                 newClaims.push(newElement);
             }

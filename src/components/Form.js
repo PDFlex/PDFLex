@@ -249,53 +249,53 @@ const Form = () => {
                 <Section>
                     <Heading>Deceased Information</Heading>
                     <Label span = {2}> Name of deceased (first, middle, last)</Label>
-                    <Input type="text" span = {2} value={deceasedName} onChange={(e) => setDeceasedName(e.target.value)}/>
+                    <Input type="text" span = {2} value={deceasedName} onChange={(e) => setDeceasedName(e.target.value)} required/>
 
                     <Label span = {1}>Date of birth </Label>
                     <Label span = {1}> Date of death </Label>
-                    <Input type="date" span = {1} value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/>
-                    <Input type="date" span = {1} value={dateOfDeath} onChange={(e) => setDateOfDeath(e.target.value)}/>
+                    <Input type="date" span = {1} value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required/>
+                    <Input type="date" span = {1} value={dateOfDeath} onChange={(e) => setDateOfDeath(e.target.value)} required/>
                 </Section>
 
                 {/* MEDICAL INFORMATION */}
                 <Section>
                     <Heading>Medical Information</Heading>
                     <Label span = {2}> Cause of Death</Label>
-                    <Input type="text" span = {2} value={causeOfDeath} onChange={(e) => setCauseOfDeath(e.target.value)}/>
+                    <Input type="text" span = {2} value={causeOfDeath} onChange={(e) => setCauseOfDeath(e.target.value)} required/>
 
                     <Label span = {2}> Was deceased hospitalized?</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={() => setDeceasedHospitalized(true)}/>
+                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={() => setDeceasedHospitalized(true)} required/>
                         Yes
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={() => setDeceasedHospitalized(false)}/>
+                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={() => setDeceasedHospitalized(false)} required/>
                         No
                     </Label>
 
                     <Label span = {2}>If yes, date admitted</Label>
-                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)}/>
+                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)} required/>
 
                     <Label span = {1}> Name of hospital </Label>
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
-                    <Input type="text" span = {1} value={hospitalName} onChange={(e) => setHospitalName(e.target.value)}/>
-                    <Input type="text" span = {1} value={hospitalAddress} onChange={(e) => setHospitalAddress(e.target.value)}/>
+                    <Input type="text" span = {1} value={hospitalName} onChange={(e) => setHospitalName(e.target.value)} required/>
+                    <Input type="text" span = {1} value={hospitalAddress} onChange={(e) => setHospitalAddress(e.target.value)} required/>
 
                     <Label span = {2}> Name of attending physician at time of death </Label>
-                    <Input type="text" span = {2} value={attendingPhysicianName} onChange={(e) => setAttendingPhysicianName(e.target.value)}/>
+                    <Input type="text" span = {2} value={attendingPhysicianName} onChange={(e) => setAttendingPhysicianName(e.target.value)} required/>
 
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
-                    <Input type="text" span = {1} value={attendingPhysicianAddress} onChange={(e) => setAttendingPhysicianAddress(e.target.value)}/>
-                    <Input type="text" span = {1} value={attendingPhysicianContactNumber} onChange={(e) => setAttendingPhysicianContactNumber(e.target.value)}/>
+                    <Input type="text" span = {1} value={attendingPhysicianAddress} onChange={(e) => setAttendingPhysicianAddress(e.target.value)} required/>
+                    <Input type="text" span = {1} value={attendingPhysicianContactNumber} onChange={(e) => setAttendingPhysicianContactNumber(e.target.value)} required/>
 
                     <Label span = {2}> Name of family physician </Label>
-                    <Input type="text" span = {2} value={familyPhysicianName} onChange={(e) => setFamilyPhysicianName(e.target.value)}/>
+                    <Input type="text" span = {2} value={familyPhysicianName} onChange={(e) => setFamilyPhysicianName(e.target.value)} required/>
 
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
-                    <Input type="text" span = {1} value={familyPhysicianAddress} onChange={(e) => setFamilyPhysicianAddress(e.target.value)}/>
-                    <Input type="text" span = {1} value={familyPhysicianContactNumber} onChange={(e) => setFamilyPhysicianContactNumber(e.target.value)}/>
+                    <Input type="text" span = {1} value={familyPhysicianAddress} onChange={(e) => setFamilyPhysicianAddress(e.target.value)} required/>
+                    <Input type="text" span = {1} value={familyPhysicianContactNumber} onChange={(e) => setFamilyPhysicianContactNumber(e.target.value)} required/>
 
                     <BoldedLabel> List the name and address of all physicians who treated the insured in the last 2 years </BoldedLabel>
                     <Label span = {1}> Physician Name </Label>
@@ -317,16 +317,16 @@ const Form = () => {
                     <Heading>Employment Information</Heading>
                     <Label span = {1}> Occupation </Label>
                     <Label span = {1}> Date last worked </Label>
-                    <Input type="text" span = {1} value={occupation} onChange={(e) => setOccupation(e.target.value)}/>
-                    <Input type="date" span = {1} value={dateLastWorked} onChange={(e) => setDateLastWorked(e.target.value)}/>
+                    <Input type="text" span = {1} value={occupation} onChange={(e) => setOccupation(e.target.value)} required/>
+                    <Input type="date" span = {1} value={dateLastWorked} onChange={(e) => setDateLastWorked(e.target.value)} required/>
 
                     <Label span = {2}> Employer </Label>
-                    <Input type="text" span = {2} value={employer} onChange={(e) => setEmployer(e.target.value)}/>
+                    <Input type="text" span = {2} value={employer} onChange={(e) => setEmployer(e.target.value)} required/>
 
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
-                    <Input type="text" span = {1} value={workAddress} onChange={(e) => setWorkAddress(e.target.value)}/>
-                    <Input type="text" span = {1} value={workContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)}/>
+                    <Input type="text" span = {1} value={workAddress} onChange={(e) => setWorkAddress(e.target.value)} required/>
+                    <Input type="text" span = {1} value={workContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)} required/>
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
@@ -349,7 +349,7 @@ const Form = () => {
                         <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={() => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
-                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
+                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)} required/>
                 </Section>
 
                 {/* NEXT OF KIN INFORMATION */}
@@ -357,13 +357,13 @@ const Form = () => {
                     <Heading>Next of Kin Information</Heading>
                     <Label span = {1}> Name of next-of-kin </Label>
                     <Label span = {1}> Relationship to insured </Label>
-                    <Input type="text" span = {1} value={nameofKin} onChange={(e) => setNameOfKin(e.target.value)}/>
-                    <Input type="text" span = {1} value={relationshipToInsured} onChange={(e) => setRelationshipToInsured(e.target.value)}/>
+                    <Input type="text" span = {1} value={nameofKin} onChange={(e) => setNameOfKin(e.target.value)} required/>
+                    <Input type="text" span = {1} value={relationshipToInsured} onChange={(e) => setRelationshipToInsured(e.target.value)} required/>
 
                     <Label span = {1}> Address </Label>
                     <Label span = {1}> Telephone number </Label>
-                    <Input type="text" span = {1} value={kinAddress} onChange={(e) => setKinAddress(e.target.value)}/>
-                    <Input type="text" span = {1} value={kinContactNumber} onChange={(e) => setKinContactNumber(e.target.value)}/>
+                    <Input type="text" span = {1} value={kinAddress} onChange={(e) => setKinAddress(e.target.value)} required/>
+                    <Input type="text" span = {1} value={kinContactNumber} onChange={(e) => setKinContactNumber(e.target.value)} required/>
                 </Section>
 
                 {/* AUTHORIZATION */}
@@ -385,8 +385,8 @@ const Form = () => {
 
                     <Label span = {1}> Signature of next-of-kin </Label>
                     <Label span = {1}> Date signed </Label>
-                    <Input type="text" span = {1} value={kinSignature} onChange={(e) => setKinSignature(e.target.value)}/>
-                    <Input type="date" span = {1} value={dateSigned} onChange={(e) => setDateSigned(e.target.value)}/>
+                    <Input type="text" span = {1} value={kinSignature} onChange={(e) => setKinSignature(e.target.value)} required/>
+                    <Input type="date" span = {1} value={dateSigned} onChange={(e) => setDateSigned(e.target.value)} required/>
                 </Section>
 
                 <ButtonContainer>
