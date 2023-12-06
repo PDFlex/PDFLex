@@ -170,6 +170,7 @@ const Form = () => {
 
         const url = 'http://localhost:8080/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {});
+        console.log("hi")
     }
 
     useEffect(() => {

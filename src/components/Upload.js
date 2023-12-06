@@ -92,8 +92,9 @@ const Upload = () => {
 
         axios.post(url, formData, config).then((response) => {
             console.log(response.data);
+            navigate("/Form");
         });
-        navigate("/Form");
+
     }
 
     return (
