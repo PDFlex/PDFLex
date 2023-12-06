@@ -70,6 +70,7 @@ const Upload = () => {
     const [file, setFile] = useState(null);
     const [numPages, setNumPages] = useState();
     const {claimId} = useContext(UserIdContext);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     function onDocumentLoadSuccess({numPages}) {
@@ -83,6 +84,7 @@ const Upload = () => {
         formData.append('file', file);
         formData.append('fileName', file.name);
         formData.append('claimId', claimId)
+        setLoading(true);
 
         const config = {
             headers: {
@@ -106,7 +108,7 @@ const Upload = () => {
                         to ensure that it was processed correctly.
                     </Text>
                     <Input type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}/>
-                    <Button>Submit</Button>
+                    {loading ? "Loading…": <Button>Submit</Button>}
                 </UploadForm>
 
             </LeftContainer>    

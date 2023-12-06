@@ -2,99 +2,96 @@ import {useContext, useEffect, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import {UserIdContext} from "../App";
-import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
-    display: flex;
-    background-color: #bdd4bc;
+  display: flex;
+  background-color: #bdd4bc;
 `
 
 const FormContainer = styled.form`
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 15rem;
-    padding: 1.5rem 1.5rem;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem 0.05rem grey;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 15rem;
+  padding: 1.5rem 1.5rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem 0.05rem grey;
 `
 
 const Section = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem;
 `
 
 const Title = styled.h2`
-    align-self: center;
+  align-self: center;
 `
 
 const Heading = styled.h4`
-    grid-column: span 2;
+  grid-column: span 2;
 `
 
 const Label = styled.label`
-    grid-column: span ${props => props.span};
-    margin: 0.3rem 0.3rem 0;
+  grid-column: span ${props => props.span};
+  margin: 0.3rem 0.3rem 0;
 `
 
 const BoldedLabel = styled.label`
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin: 1rem 0.3rem 0.1rem;
-    grid-column: span 2;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 1rem 0.3rem 0.1rem;
+  grid-column: span 2;
 `
 
 const Input = styled.input`
-    padding: 0.5rem 1rem;
-    margin: 0.1rem 0.3rem 0.3rem;
-    border: 0.05rem solid #a9a9a9;
-    border-radius: 0.2rem;
-    box-sizing: border-box;
-    &:focus {
-        outline: 0.07rem solid #949494;
-    }
-    &::-webkit-inner-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    } 
-    &::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
-    grid-column: span ${props => props.span};
-    
+  padding: 0.5rem 1rem;
+  margin: 0.1rem 0.3rem 0.3rem;
+  border: 0.05rem solid #a9a9a9;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+  &:focus {
+    outline: 0.07rem solid #949494;
+  }
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  grid-column: span ${props => props.span};
+
 `
 
 const Paragraph = styled.p`
-    grid-column: span 2;
+  grid-column: span 2;
 `
 
 const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Button = styled.button`
-    box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
-    border-radius: 1.5em;
-    background-color: #11a346;
-    border: none;
-    margin: 1rem;
-    padding: 1% 2%;
-    font-size: 1.3em;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    &:hover{
-        background-color: #0c7c44;
-    }
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
+  border-radius: 1.5em;
+  background-color: #11a346;
+  border: none;
+  margin: 1rem;
+  padding: 1% 2%;
+  font-size: 1.3em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  &:hover{
+    background-color: #0c7c44;
+  }
 `
 
 const Form = () => {
-    const navigate = useNavigate();
-
     // CLAIM CHECKLIST
     const {claimId} = useContext(UserIdContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
@@ -103,13 +100,13 @@ const Form = () => {
 
     // DECEASED INFORMATION
     const [deceasedName, setDeceasedName] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState(new Date());
-    const [dateOfDeath, setDateOfDeath] = useState(new Date());
+    const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString().split('T')[0]);
+    const [dateOfDeath, setDateOfDeath] = useState(new Date().toISOString().split('T')[0]);
 
     // MEDICAL INFORMATION
     const [causeOfDeath, setCauseOfDeath] = useState('');
     const [deceasedHospitalized, setDeceasedHospitalized] = useState(false);
-    const [hospitalizationDate, setHospitalizationDate] = useState(new Date());
+    const [hospitalizationDate, setHospitalizationDate] = useState(new Date().toISOString().split('T')[0]);
     const [hospitalName, setHospitalName] = useState('');
     const [hospitalAddress, setHospitalAddress] = useState('');
 
@@ -133,7 +130,7 @@ const Form = () => {
 
     // EMPLOYMENT INFORMATION
     const [occupation, setOccupation] = useState('');
-    const [dateLastWorked, setDateLastWorked] = useState(new Date());
+    const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
     const [workContactNumber, setWorkContactNumber] = useState('');
@@ -146,9 +143,35 @@ const Form = () => {
     const [kinAddress, setKinAddress] = useState('');
     const [kinContactNumber, setKinContactNumber] = useState('');
     const [kinSignature, setKinSignature] = useState('');
-    const [dateSigned, setDateSigned] = useState(new Date());
+    const [dateSigned, setDateSigned] = useState(new Date().toISOString().split('T')[0]);
 
-    // Function that retrieves the form information from the backend
+    // Function that sends the form information to the backend
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let reasonInsuredStoppedWorking = '';
+
+        if (reasonInsuredStoppedWorkingRadio === 'Other') {
+            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingOther;
+        } else {
+            reasonInsuredStoppedWorking = reasonInsuredStoppedWorkingRadio;
+        }
+
+        const form = {
+            completedDeathCertificate, attachedDeathCertificate, completedClaimSubmission,
+            deceasedName, dateOfBirth, dateOfDeath,
+            causeOfDeath, deceasedHospitalized, hospitalizationDate, hospitalName, hospitalAddress,
+            attendingPhysicianName, attendingPhysicianAddress, attendingPhysicianContactNumber,
+            familyPhysicianName, familyPhysicianAddress, familyPhysicianContactNumber,
+            pastPhysicianNames, pastPhysicianAddresses,
+            occupation, dateLastWorked, employer,
+            workAddress, workContactNumber, reasonInsuredStoppedWorking,
+            nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
+        };
+
+        const url = 'http://localhost:8080/form-info/' + claimId.toString();
+        axios.post(url, form).then(() => {});
+        console.log("hi")
+    }
 
     useEffect(() => {
         const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
@@ -157,8 +180,8 @@ const Form = () => {
             setAttachedDeathCertificate(res.data.attachedDeathCertificate);
             setCompletedClaimSubmission(res.data.completedClaimSubmission);
             setDeceasedName(res.data.deceasedName);
-            setDateOfBirth(new Date(res.data.dateOfBirth));
-            setDateOfDeath(new Date(res.data.dateOfDeath));
+            setDateOfBirth(res.data.dateOfBirth);
+            setDateOfDeath(res.data.dateOfDeath);
             setCauseOfDeath(res.data.causeOfDeath);
             setDeceasedHospitalized(res.data.deceasedHospitalized);
             setHospitalizationDate(res.data.hospitalizationDate);
@@ -181,7 +204,7 @@ const Form = () => {
             setEmployer(res.data.employer);
             setWorkAddress(res.data.workAddress);
             setWorkContactNumber(res.data.workContactNumber);
-            // setReasonInsuredStoppedWorking(res.data.reasonInsuredStoppedWorking);
+            setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
             setNameOfKin(res.data.nameofKin);
             setRelationshipToInsured(res.data.relationshipToInsured);
             setKinAddress(res.data.kinAddress);
@@ -193,11 +216,6 @@ const Form = () => {
         });
     }, []);
 
-    function BackToFormsDashboard() {
-        navigate('/ViewFormsDashboard');
-    }
-
-
     return (
         <Container>
             <FormContainer>
@@ -208,15 +226,15 @@ const Form = () => {
                     <Heading> Claim Checklist </Heading>
 
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} value={completedDeathCertificate} onChange={(e) => setCompletedDeathCertificate(true)}/>
+                        <Input type="checkbox" span = {2} checked={completedDeathCertificate} onChange={(e) => setCompletedDeathCertificate(true)}/>
                         Has the Certification of Death form been completed by the attending physician, coroner, or family doctor?
                     </Label>
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} value={attachedDeathCertificate} onChange={(e) => setAttachedDeathCertificate(true)}/>
+                        <Input type="checkbox" span = {2} checked={attachedDeathCertificate} onChange={(e) => setAttachedDeathCertificate(true)}/>
                         Attach an original or a copy of the death certificate.
                     </Label>
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} value={completedClaimSubmission} onChange={(e) => setCompletedClaimSubmission(true)}/>
+                        <Input type="checkbox" span = {2} checked={completedClaimSubmission} onChange={(e) => setCompletedClaimSubmission(true)}/>
                         Has the lender either completed the claim submission online or completed the Statement of Lending Institution Form?
                     </Label>
                 </Section>
@@ -241,11 +259,11 @@ const Form = () => {
 
                     <Label span = {2}> Was deceased hospitalized?</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="hospitalized" value={deceasedHospitalized} onChange={(e) => setDeceasedHospitalized(true)}/>
+                        <Input type="radio" span = {2} name="hospitalized" value={"true"} checked={deceasedHospitalized === true}  onChange={(e) => setDeceasedHospitalized(true)}/>
                         Yes
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="hospitalized" value={deceasedHospitalized} onChange={(e) => setDeceasedHospitalized(false)}/>
+                        <Input type="radio" span = {1} name="hospitalized" value={"false"} checked={deceasedHospitalized === false}  onChange={(e) => setDeceasedHospitalized(false)}/>
                         No
                     </Label>
 
@@ -306,23 +324,23 @@ const Form = () => {
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Normal retirement")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Normal retirement"} checked={reasonInsuredStoppedWorkingRadio === "Normal retirement"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Normal retirement")}/>
                         Normal retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Disability retirement")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Disability retirement"} checked={reasonInsuredStoppedWorkingRadio === "Disability retirement"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Disability retirement")}/>
                         Disability retirement
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Illness")}/>
+                        <Input type="radio" span = {2} name="reasonStoppedWorking" value={"Illness"} checked={reasonInsuredStoppedWorkingRadio === "Illness"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Illness")}/>
                         Illness
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Death")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Death"} checked={reasonInsuredStoppedWorkingRadio === "Death"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Death")}/>
                         Death
                     </Label>
                     <Label span = {2}>
-                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={reasonInsuredStoppedWorkingRadio} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Other")}/>
+                        <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={(e) => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
                     <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
@@ -365,9 +383,6 @@ const Form = () => {
                     <Input type="date" span = {1} value={dateSigned} onChange={(e) => setDateSigned(e.target.value)}/>
                 </Section>
 
-                <ButtonContainer>
-                    <Button onClick={BackToFormsDashboard}>Back to Form Dashboard</Button>
-                </ButtonContainer>
             </FormContainer>
         </Container>
     );
