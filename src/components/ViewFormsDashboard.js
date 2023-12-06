@@ -76,7 +76,6 @@ const ViewFormsDashboard = () => {
     const navigate = useNavigate();
     const {clientId} = useContext(UserIdContext)
     const {claimId} = useContext(UserIdContext);
-
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
@@ -106,7 +105,6 @@ const ViewFormsDashboard = () => {
     }, [clientId, claimId]);
 
 
-
     function renderTable(tableData) {
         return tableData.map(item => (
             <tr key={item.id}>
@@ -126,7 +124,14 @@ const ViewFormsDashboard = () => {
         navigate('/ViewClaimsDashboard');
     }
 
+    const [submitted, setSubmitted] = useState(false);
+
     function SubmitClaim() {
+        let url = "http://localhost:8080/" + clientId.toString() + "/" + claimId.toString() + "/submit"
+
+        axios.get(url).then((res) => {
+            setSubmitted(Boolean(res.data))
+        });
         navigate('/ClaimSubmittedView');
     }
 
@@ -155,8 +160,10 @@ const ViewFormsDashboard = () => {
 
                 </Table>
             </ClaimsContainer>
-            <Button onClick={SubmitClaim}>Submit Claim</Button>
+            <Button onClick={SubmitClaim} hidden={submitted}>Submit Claim</Button>
+
         </Container>
+
     );
 }
 
