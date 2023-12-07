@@ -56,7 +56,7 @@ const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
     const {clientId} = useContext(UserIdContext)
     const {setClaimId} = useContext(UserIdContext);
-    const url = 'http://localhost:3000/'+ clientId.toString() + '/claims';
+    const url = 'http://localhost:8080/'+ clientId.toString() + '/claims';
 
     const [tableData, setTableData] = useState([]);
     console.log(clientId);
