@@ -79,7 +79,7 @@ const ViewFormsDashboard = () => {
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-        const url = 'http://localhost:8080/' + clientId.toString() + '/' + claimId.toString() +'/forms';
+        const url = 'http://159.203.24.109:8080/' + clientId.toString() + '/' + claimId.toString() +'/forms';
 
         axios.get(url).then((res) => {
             // const data = res.json();
@@ -125,7 +125,7 @@ const ViewFormsDashboard = () => {
     const [submitted, setSubmitted] = useState(false);
 
     function SubmitClaim() {
-        let url = "http://localhost:8080/" + clientId.toString() + "/" + claimId.toString() + "/submit"
+        let url = "http://159.203.24.109:8080/" + clientId.toString() + "/" + claimId.toString() + "/submit"
 
         axios.get(url).then((res) => {
             setSubmitted(Boolean(res.data))

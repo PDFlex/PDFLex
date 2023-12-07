@@ -108,7 +108,7 @@ const Login = () => {
 
     const verifyClientId = (clientId) => {
         if (clientId.clientId !== '') {
-            const url = 'http://localhost:8080/login/' + clientId.clientId;
+            const url = 'http://159.203.24.109:8080/login/' + clientId.clientId;
             axios.get(url).then((res) => {
                 if (res.data === false) {
                     setVerificationMsg('User not found.')

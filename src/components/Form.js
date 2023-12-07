@@ -171,7 +171,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080/form-info/' + claimId.toString();
+        const url = 'http://159.203.24.109:8080/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {
             navigate('/ViewFormsDashboard');
         });
@@ -179,7 +179,7 @@ const Form = () => {
     }
 
     useEffect(() => {
-        const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'http://159.203.24.109:8080/form-info/' + claimId.toString() + "/retrieve";
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);
@@ -232,15 +232,15 @@ const Form = () => {
                     <Heading> Claim Checklist </Heading>
 
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} checked={completedDeathCertificate} onChange={(e) => setCompletedDeathCertificate(true)}/>
+                        <Input type="checkbox" span = {2} checked={completedDeathCertificate} onChange={() => setCompletedDeathCertificate(true)}/>
                         Has the Certification of Death form been completed by the attending physician, coroner, or family doctor?
                     </Label>
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} checked={attachedDeathCertificate} onChange={(e) => setAttachedDeathCertificate(true)}/>
+                        <Input type="checkbox" span = {2} checked={attachedDeathCertificate} onChange={() => setAttachedDeathCertificate(true)}/>
                         Attach an original or a copy of the death certificate.
                     </Label>
                     <Label span = {2}>
-                        <Input type="checkbox" span = {2} checked={completedClaimSubmission} onChange={(e) => setCompletedClaimSubmission(true)}/>
+                        <Input type="checkbox" span = {2} checked={completedClaimSubmission} onChange={() => setCompletedClaimSubmission(true)}/>
                         Has the lender either completed the claim submission online or completed the Statement of Lending Institution Form?
                     </Label>
                 </Section>

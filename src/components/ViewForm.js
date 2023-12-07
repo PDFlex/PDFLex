@@ -135,7 +135,7 @@ const Form = () => {
     const [workContactNumber, setWorkContactNumber] = useState('');
     const [reasonInsuredStoppedWorkingRadio, setReasonInsuredStoppedWorkingRadio] = useState('');
     // eslint-disable-next-line
-    const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
+    const [reasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
     const [nameofKin, setNameOfKin] = useState('');
@@ -147,7 +147,7 @@ const Form = () => {
 
     // Function that retrieves the form information from the backend
     useEffect(() => {
-        const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'http://159.203.24.109:8080/form-info/' + claimId.toString() + "/retrieve";
         axios.get(url, claimId).then((res) => {
             setCompletedDeathCertificate(res.data.completedDeathCertificate);
             setAttachedDeathCertificate(res.data.attachedDeathCertificate);
