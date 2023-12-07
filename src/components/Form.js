@@ -179,7 +179,7 @@ const Form = () => {
     }
 
     useEffect(() => {
-        const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'https://pdflex-backend.duckdns.org/retrieve-info/' + claimId.toString();
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);
