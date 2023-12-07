@@ -274,7 +274,7 @@ const Form = () => {
                     </Label>
 
                     <Label span = {2}>If yes, date admitted</Label>
-                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)} required/>
+                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)}/>
 
                     <Label span = {1}> Name of hospital </Label>
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
