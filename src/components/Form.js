@@ -210,7 +210,7 @@ const Form = () => {
                 setWorkAddress(res.data.workAddress);
                 setWorkContactNumber(res.data.workContactNumber);
                 setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
-                setNameOfKin(res.data.nameofKin);
+                setNameOfKin(res.data.nameOfKin);
                 setRelationshipToInsured(res.data.relationshipToInsured);
                 setKinAddress(res.data.kinAddress);
                 setKinContactNumber(res.data.kinContactNumber);
@@ -357,7 +357,7 @@ const Form = () => {
                     <Heading>Next of Kin Information</Heading>
                     <Label span = {1}> Name of next-of-kin </Label>
                     <Label span = {1}> Relationship to insured </Label>
-                    <Input type="text" span = {1} value={nameofKin} onChange={(e) => setNameOfKin(e.target.value)} required/>
+                    <Input type="text" span = {1} value={nameOfKin} onChange={(e) => setNameOfKin(e.target.value)} required/>
                     <Input type="text" span = {1} value={relationshipToInsured} onChange={(e) => setRelationshipToInsured(e.target.value)} required/>
 
                     <Label span = {1}> Address </Label>
