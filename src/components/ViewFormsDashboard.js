@@ -159,6 +159,7 @@ const ViewFormsDashboard = () => {
 
                 </Table>
             </ClaimsContainer>
+            {/* This button currently does not hide when the form is submitted. Stretch goal!*/}
             <Button onClick={SubmitClaim} hidden={submitted}>Submit Claim</Button>
 
         </Container>
