@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'http://159.203.24.109:8080',
+    baseURL: 'https://pdflex-backend.duckdns.org',
 });

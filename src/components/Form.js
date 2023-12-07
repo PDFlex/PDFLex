@@ -171,7 +171,7 @@ const Form = () => {
             nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://159.203.24.109:8080/form-info/' + claimId.toString();
+        const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {
             navigate('/ViewFormsDashboard');
         });
@@ -179,7 +179,7 @@ const Form = () => {
     }
 
     useEffect(() => {
-        const url = 'http://159.203.24.109:8080/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString() + "/retrieve";
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);

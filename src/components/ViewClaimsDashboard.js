@@ -56,7 +56,7 @@ const ViewClaimsDashboard = () => {
     const navigate = useNavigate();
     const {clientId} = useContext(UserIdContext)
     const {setClaimId} = useContext(UserIdContext);
-    const url = 'http://159.203.24.109:8080/'+ clientId.toString() + '/claims';
+    const url = 'https://pdflex-backend.duckdns.org/'+ clientId.toString() + '/claims';
 
     const [tableData, setTableData] = useState([]);
     console.log(clientId);
@@ -91,7 +91,7 @@ const ViewClaimsDashboard = () => {
         }
         navigate('/SelectFillOrUpload');
 
-        const url2 = 'http://159.203.24.109:8080/new-claim';
+        const url2 = 'https://pdflex-backend.duckdns.org/new-claim';
         axios.post(url2, baseMessage).then((res) => {
             setClaimId(JSON.parse(JSON.stringify(res.data)))
         } );

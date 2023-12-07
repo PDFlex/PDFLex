@@ -79,7 +79,7 @@ const Upload = () => {
 
     function handleSubmit(event) {
         event.preventDefault()
-        const url = 'http://159.203.24.109:8080/pdf';
+        const url = 'https://pdflex-backend.duckdns.org/pdf';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);
