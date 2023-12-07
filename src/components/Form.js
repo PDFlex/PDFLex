@@ -168,7 +168,7 @@ const Form = () => {
             pastPhysicianNames, pastPhysicianAddresses,
             occupation, dateLastWorked, employer,
             workAddress, workContactNumber, reasonInsuredStoppedWorking,
-            nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
+            nameOfKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
         const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString();
