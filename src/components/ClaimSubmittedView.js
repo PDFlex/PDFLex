@@ -41,7 +41,7 @@ const ClaimSubmittedView = () => {
     return (
         <Container>
             <Heading>Claim Submitted</Heading>
-            <Text>You are all done! You can safely close this tab.</Text>
+            <Text>You are all done!</Text>
             <Button onClick={() => navigate('/ViewClaimsDashboard')}>View Dashboard</Button>
         </Container>
     );

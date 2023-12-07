@@ -21,7 +21,6 @@ const ClaimsContainer = styled.div`
 
 const HeaderContainer = styled.div`
     display: flex;
-    align-items: center;
     width: 80%;
     height: 10%;
     margin: 0.5em 0;
@@ -36,12 +35,11 @@ const Heading = styled.h1`
 
 const Button = styled.button`
     height: 75%;
-    margin-left: auto;
-    display: inline-block;
     box-shadow: 0.1rem 0.1rem 0.2rem 0.005rem lightgrey;
     border-radius: 0.5em;
     background-color: #11a346;
     border: none;
+    margin: 0 1rem;
     padding: 0 1em;
     font-size: 1.2em;
     text-align: center;
@@ -117,6 +115,7 @@ const ViewClaimsDashboard = () => {
             <HeaderContainer>
                 <Heading>Claims Dashboard</Heading>
                 <Button onClick={CreateNewClaim}>Create New Claim</Button>
+                <Button onClick={() => navigate('/LoggedOut')}>Log Out</Button>
             </HeaderContainer>
 
             <ClaimsContainer>

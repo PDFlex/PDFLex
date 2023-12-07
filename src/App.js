@@ -8,9 +8,8 @@ import Form from "./components/Form";
 import ClaimSubmittedView from "./components/ClaimSubmittedView";
 import ViewFormsDashboard from "./components/ViewFormsDashboard";
 import ViewForm from "./components/ViewForm";
-
+import LoggedOut from './components/LoggedOut';
 import {createContext, useState} from "react";
-
 
 
 
@@ -43,6 +42,7 @@ function App() {
                     <Route path="/ClaimSubmittedView" element={<ClaimSubmittedView/>}></Route>;
                     <Route path="/ViewFormsDashboard" element={<ViewFormsDashboard/>}></Route>;
                     <Route path="/ViewForm" element={<ViewForm/>}></Route>;
+                    <Route path="/LoggedOut" element={<LoggedOut/>}></Route>;
 
                 </Routes>
             </UserIdContext.Provider>
