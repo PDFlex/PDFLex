@@ -141,7 +141,7 @@ const Form = () => {
     const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
-    const [nameofKin, setNameOfKin] = useState('');
+    const [nameOfKin, setNameOfKin] = useState('');
     const [relationshipToInsured, setRelationshipToInsured] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinContactNumber, setKinContactNumber] = useState('');
