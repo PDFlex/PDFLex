@@ -132,13 +132,13 @@ const Form = () => {
     const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
-    const [workContactNumber, setWorkContactNumber] = useState('');
+    const [employerContactNumber, setWorkContactNumber] = useState('');
     const [reasonInsuredStoppedWorkingRadio, setReasonInsuredStoppedWorkingRadio] = useState('');
     // eslint-disable-next-line
     const [reasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
-    const [nameofKin, setNameOfKin] = useState('');
+    const [nameOfKin, setNameOfKin] = useState('');
     const [relationshipToInsured, setRelationshipToInsured] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinContactNumber, setKinContactNumber] = useState('');
@@ -176,9 +176,9 @@ const Form = () => {
             setDateLastWorked(res.data.dateLastWorked);
             setEmployer(res.data.employer);
             setWorkAddress(res.data.workAddress);
-            setWorkContactNumber(res.data.workContactNumber);
+            setWorkContactNumber(res.data.employerContactNumber);
             setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
-            setNameOfKin(res.data.nameofKin);
+            setNameOfKin(res.data.nameOfKin);
             setRelationshipToInsured(res.data.relationshipToInsured);
             setKinAddress(res.data.kinAddress);
             setKinContactNumber(res.data.kinContactNumber);
@@ -300,7 +300,7 @@ const Form = () => {
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
                     <Input type="text" span = {1} value={workAddress} readOnly/>
-                    <Input type="text" span = {1} value={workContactNumber} readOnly/>
+                    <Input type="text" span = {1} value={employerContactNumber} readOnly/>
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
@@ -331,7 +331,7 @@ const Form = () => {
                     <Heading>Next of Kin Information</Heading>
                     <Label span = {1}> Name of next-of-kin </Label>
                     <Label span = {1}> Relationship to insured </Label>
-                    <Input type="text" span = {1} value={nameofKin} readOnly/>
+                    <Input type="text" span = {1} value={nameOfKin} readOnly/>
                     <Input type="text" span = {1} value={relationshipToInsured} readOnly/>
 
                     <Label span = {1}> Address </Label>
