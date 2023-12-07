@@ -349,7 +349,7 @@ const Form = () => {
                         <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={() => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
-                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)} required/>
+                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
                 </Section>
 
                 {/* NEXT OF KIN INFORMATION */}
