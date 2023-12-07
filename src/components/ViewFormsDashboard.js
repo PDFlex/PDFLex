@@ -1,3 +1,7 @@
+// This page is the claims dashboard. It retrieves all the form associated with a certain claimId and
+// displays the forms in a table.
+// Associated with ViewFormsDashboardUseCase and SubmitClaimUseCase.
+
 import {useEffect, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
@@ -77,7 +81,9 @@ const ViewFormsDashboard = () => {
     const {clientId} = useContext(UserIdContext)
     const {claimId} = useContext(UserIdContext);
     const [tableData, setTableData] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
 
+    // Retreives all forms associated with the claimId. Associated with ViewFormsDashboardUseCase.
     useEffect(() => {
         const url = 'https://pdflex-backend.duckdns.org/' + clientId.toString() + '/' + claimId.toString() +'/forms';
 
@@ -103,6 +109,15 @@ const ViewFormsDashboard = () => {
         // eslint-disable-next-line
     }, [clientId, claimId]);
 
+    // Creates a new claim. Associated with CreateNewClaimUseCase.
+    function SubmitClaim() {
+        let url = "https://pdflex-backend.duckdns.org/" + clientId.toString() + "/" + claimId.toString() + "/submit"
+
+        axios.get(url).then((res) => {
+            setSubmitted(Boolean(res.data))
+            navigate('/ClaimSubmittedView');
+        });
+    }
 
     function renderTable(tableData) {
         return tableData.map(item => (
@@ -111,8 +126,6 @@ const ViewFormsDashboard = () => {
                 <td>{item.formType}</td>
                 <td>{item.status}</td>
                 <td><Link to={`/ViewForm`}><HeaderButton>View</HeaderButton></Link></td>
-
-                {/*TODO: Add a form view page*/}
             </tr>
         ))
 
@@ -120,17 +133,6 @@ const ViewFormsDashboard = () => {
 
     function BackToClaimsDashboard() {
         navigate('/ViewClaimsDashboard');
-    }
-
-    const [submitted, setSubmitted] = useState(false);
-
-    function SubmitClaim() {
-        let url = "https://pdflex-backend.duckdns.org/" + clientId.toString() + "/" + claimId.toString() + "/submit"
-
-        axios.get(url).then((res) => {
-            setSubmitted(Boolean(res.data))
-            navigate('/ClaimSubmittedView');
-        });
     }
 
     return (

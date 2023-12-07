@@ -1,3 +1,7 @@
+// This page is the claims dashboard. It retrieves all the claims associated with a certain clientId and
+// displays the claims in a table.
+// Associated with ViewClaimsDashboardUseCase and CreateNewClaimUseCase.
+
 import {useEffect, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
@@ -59,6 +63,7 @@ const ViewClaimsDashboard = () => {
     const [tableData, setTableData] = useState([]);
     console.log(clientId);
 
+    // Retreives all claims associated with the clientId. Associated with ViewClaimsDashboardUseCase.
     useEffect(() => {
         axios.get(url).then((res) => {
             const parsedData = JSON.parse(JSON.stringify(res.data))
@@ -83,6 +88,7 @@ const ViewClaimsDashboard = () => {
     }, [clientId, url]);
 
 
+    // Creates a new claim. Associated with CreateNewClaimUseCase.
     function CreateNewClaim() {
         const baseMessage = {
             "clientId": clientId.toString()
@@ -94,6 +100,8 @@ const ViewClaimsDashboard = () => {
             setClaimId(JSON.parse(JSON.stringify(res.data)))
         } );
     }
+
+    // Renders the claims table
     function renderTable(tableData) {
         return tableData.map(item => (
             <tr key={item.id}>

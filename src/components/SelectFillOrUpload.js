@@ -1,3 +1,5 @@
+// This page allows users to select whether they want to upload a PDF or manually fill out a form.
+
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 

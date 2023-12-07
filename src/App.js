@@ -11,8 +11,6 @@ import ViewForm from "./components/ViewForm";
 import LoggedOut from './components/LoggedOut';
 import {createContext, useState} from "react";
 
-
-
 // Create a context to hold the user ID
 export const UserIdContext = createContext({
     clientId: "",

@@ -1,3 +1,6 @@
+// This page displays to the users that the claim has been submitted and allows users
+// to go back to the claims dashboard.
+
 import styled from 'styled-components';
 import {useNavigate} from "react-router-dom";
 

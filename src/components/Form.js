@@ -1,3 +1,7 @@
+// This page is for editing a digital form. It is used whenever users manually complete a form or when the OCR
+// results get displayed. Once the user presses "Submit", the form gets saved into the database.
+// Associated with SaveFormUseCase and RetrieveFormUseCase.
+
 import {useContext, useEffect, useState} from "react";
 import styled from 'styled-components';
 import axios from "axios";
@@ -94,9 +98,11 @@ const Button = styled.button`
 
 const Form = () => {
     const navigate = useNavigate();
+    const {claimId} = useContext(UserIdContext);
+
+    // Below are all variables associated with the form fields.
 
     // CLAIM CHECKLIST
-    const {claimId} = useContext(UserIdContext);
     const [completedDeathCertificate, setCompletedDeathCertificate] = useState(false);
     const [attachedDeathCertificate, setAttachedDeathCertificate] = useState(false);
     const [completedClaimSubmission, setCompletedClaimSubmission] = useState(false);
@@ -148,7 +154,7 @@ const Form = () => {
     const [kinSignature, setKinSignature] = useState('');
     const [dateSigned, setDateSigned] = useState(new Date().toISOString().split('T')[0]);
 
-    // Function that sends the form information to the backend
+    // Sends the form information to the backend. Associate with the SaveFormUseCase.
     const handleSubmit = (e) => {
         e.preventDefault();
         let reasonInsuredStoppedWorking = '';
@@ -178,6 +184,8 @@ const Form = () => {
 
     }
 
+    // Retrieves form fields from the backend and populates the frontend form fields.
+    // Associated with RetrieveFormUseCase.
     useEffect(() => {
         const url = 'https://pdflex-backend.duckdns.org/retrieve-info/' + claimId.toString();
         axios.get(url, claimId).then((res) => {

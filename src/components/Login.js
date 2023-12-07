@@ -1,3 +1,5 @@
+// This page is the login screen. Associated with LoginUseCase.
+
 import { useState, useContext } from "react";
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
@@ -106,6 +108,7 @@ const Login = () => {
     const [verificationMsg, setVerificationMsg] = useState('');
     const navigate = useNavigate();
 
+    // Verifies whether the cliendId exists in our database. Associated with LoginFormUseCase.
     const verifyClientId = (clientId) => {
         if (clientId.clientId !== '') {
             const url = 'https://pdflex-backend.duckdns.org/login/' + clientId.clientId;

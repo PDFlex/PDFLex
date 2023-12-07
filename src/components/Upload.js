@@ -1,3 +1,7 @@
+// This is the PDF upload page. It takes the PDF file uploaded by the user and displays it.
+// When submitted, the PDF is sent through the OCR.
+// Associated with UploadFormUseCase.
+
 import {UserIdContext} from "../App";
 import { useState, useContext } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
@@ -6,6 +10,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// This is related to the PDF display
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 const Container = styled.div`
@@ -72,11 +77,13 @@ const Upload = () => {
     const {claimId} = useContext(UserIdContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    
+    // Sets number of pages in the uploaded PDF
     function onDocumentLoadSuccess({numPages}) {
         setNumPages(numPages);
       }
 
+    // Configures the PDF information and sends it to the OCR
     function handleSubmit(event) {
         event.preventDefault()
         const url = 'https://pdflex-backend.duckdns.org/pdf';
@@ -113,6 +120,7 @@ const Upload = () => {
 
             </LeftContainer>    
             <RightContainer>
+                {/* This displays the PDF by iterating through the number of pages and displaying each page. */}
                 <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
                     {Array.apply(null, Array(numPages))
                         .map((x, i) => i + 1)

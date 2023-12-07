@@ -1,3 +1,5 @@
+// This page is the logout screen. Once users are logged out, they can click to go back to the login page.
+
 import styled from 'styled-components';
 import securianLogo from '../images/securian-logo.png';
 import backgroundImage from '../images/login-background.jpg';
