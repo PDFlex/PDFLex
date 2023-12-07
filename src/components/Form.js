@@ -136,7 +136,7 @@ const Form = () => {
     const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
-    const [workContactNumber, setWorkContactNumber] = useState('');
+    const [employerContactNumber, setWorkContactNumber] = useState('');
     const [reasonInsuredStoppedWorkingRadio, setReasonInsuredStoppedWorkingRadio] = useState('');
     const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
 
@@ -167,7 +167,7 @@ const Form = () => {
             familyPhysicianName, familyPhysicianAddress, familyPhysicianContactNumber,
             pastPhysicianNames, pastPhysicianAddresses,
             occupation, dateLastWorked, employer,
-            workAddress, workContactNumber, reasonInsuredStoppedWorking,
+            workAddress, employerContactNumber, reasonInsuredStoppedWorking,
             nameOfKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
@@ -208,7 +208,7 @@ const Form = () => {
                 setDateLastWorked(res.data.dateLastWorked);
                 setEmployer(res.data.employer);
                 setWorkAddress(res.data.workAddress);
-                setWorkContactNumber(res.data.workContactNumber);
+                setWorkContactNumber(res.data.employerContactNumber);
                 setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
                 setNameOfKin(res.data.nameOfKin);
                 setRelationshipToInsured(res.data.relationshipToInsured);
@@ -326,7 +326,7 @@ const Form = () => {
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
                     <Input type="text" span = {1} value={workAddress} onChange={(e) => setWorkAddress(e.target.value)} required/>
-                    <Input type="text" span = {1} value={workContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)} required/>
+                    <Input type="text" span = {1} value={employerContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)} required/>
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
