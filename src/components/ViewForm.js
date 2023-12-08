@@ -147,7 +147,7 @@ const Form = () => {
 
     // Function that retrieves the form information from the backend
     useEffect(() => {
-        const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'https://pdflex-backend.duckdns.org/retrieve-info/' + claimId.toString();
         axios.get(url, claimId).then((res) => {
             setCompletedDeathCertificate(res.data.completedDeathCertificate);
             setAttachedDeathCertificate(res.data.attachedDeathCertificate);

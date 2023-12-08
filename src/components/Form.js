@@ -136,12 +136,12 @@ const Form = () => {
     const [dateLastWorked, setDateLastWorked] = useState(new Date().toISOString().split('T')[0]);
     const [employer, setEmployer] = useState('');
     const [workAddress, setWorkAddress] = useState('');
-    const [workContactNumber, setWorkContactNumber] = useState('');
+    const [employerContactNumber, setWorkContactNumber] = useState('');
     const [reasonInsuredStoppedWorkingRadio, setReasonInsuredStoppedWorkingRadio] = useState('');
     const [reasonInsuredStoppedWorkingOther, setReasonInsuredStoppedWorkingOther] = useState('');
 
     // NEXT OF KIN INFORMATION
-    const [nameofKin, setNameOfKin] = useState('');
+    const [nameOfKin, setNameOfKin] = useState('');
     const [relationshipToInsured, setRelationshipToInsured] = useState('');
     const [kinAddress, setKinAddress] = useState('');
     const [kinContactNumber, setKinContactNumber] = useState('');
@@ -167,11 +167,11 @@ const Form = () => {
             familyPhysicianName, familyPhysicianAddress, familyPhysicianContactNumber,
             pastPhysicianNames, pastPhysicianAddresses,
             occupation, dateLastWorked, employer,
-            workAddress, workContactNumber, reasonInsuredStoppedWorking,
-            nameofKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
+            workAddress, employerContactNumber, reasonInsuredStoppedWorking,
+            nameOfKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'http://localhost:8080/form-info/' + claimId.toString();
+        const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {
             navigate('/ViewFormsDashboard');
         });
@@ -179,7 +179,7 @@ const Form = () => {
     }
 
     useEffect(() => {
-        const url = 'http://localhost:8080/form-info/' + claimId.toString() + "/retrieve";
+        const url = 'https://pdflex-backend.duckdns.org/retrieve-info/' + claimId.toString();
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);
@@ -208,9 +208,9 @@ const Form = () => {
                 setDateLastWorked(res.data.dateLastWorked);
                 setEmployer(res.data.employer);
                 setWorkAddress(res.data.workAddress);
-                setWorkContactNumber(res.data.workContactNumber);
+                setWorkContactNumber(res.data.employerContactNumber);
                 setReasonInsuredStoppedWorkingRadio(res.data.reasonInsuredStoppedWorking);
-                setNameOfKin(res.data.nameofKin);
+                setNameOfKin(res.data.nameOfKin);
                 setRelationshipToInsured(res.data.relationshipToInsured);
                 setKinAddress(res.data.kinAddress);
                 setKinContactNumber(res.data.kinContactNumber);
@@ -274,7 +274,7 @@ const Form = () => {
                     </Label>
 
                     <Label span = {2}>If yes, date admitted</Label>
-                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)} required/>
+                    <Input type="date" span = {2} value={hospitalizationDate} onChange={(e) => setHospitalizationDate(e.target.value)}/>
 
                     <Label span = {1}> Name of hospital </Label>
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
@@ -326,7 +326,7 @@ const Form = () => {
                     <Label span = {1}> Address (street, city, province, postal code) </Label>
                     <Label span = {1}> Telephone number </Label>
                     <Input type="text" span = {1} value={workAddress} onChange={(e) => setWorkAddress(e.target.value)} required/>
-                    <Input type="text" span = {1} value={workContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)} required/>
+                    <Input type="text" span = {1} value={employerContactNumber} onChange={(e) => setWorkContactNumber(e.target.value)} required/>
 
                     <Label span = {2}> Reason insured stopped working</Label>
                     <Label span = {2}>
@@ -349,7 +349,7 @@ const Form = () => {
                         <Input type="radio" span = {1} name="reasonStoppedWorking" value={"Other"} checked={reasonInsuredStoppedWorkingRadio === "Other"} onChange={() => setReasonInsuredStoppedWorkingRadio("Other")}/>
                         Other (please specify):
                     </Label>
-                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)} required/>
+                    <Input type="text" span = {2} value={reasonInsuredStoppedWorkingOther} onChange={(e) => setReasonInsuredStoppedWorkingOther(e.target.value)}/>
                 </Section>
 
                 {/* NEXT OF KIN INFORMATION */}
@@ -357,7 +357,7 @@ const Form = () => {
                     <Heading>Next of Kin Information</Heading>
                     <Label span = {1}> Name of next-of-kin </Label>
                     <Label span = {1}> Relationship to insured </Label>
-                    <Input type="text" span = {1} value={nameofKin} onChange={(e) => setNameOfKin(e.target.value)} required/>
+                    <Input type="text" span = {1} value={nameOfKin} onChange={(e) => setNameOfKin(e.target.value)} required/>
                     <Input type="text" span = {1} value={relationshipToInsured} onChange={(e) => setRelationshipToInsured(e.target.value)} required/>
 
                     <Label span = {1}> Address </Label>
