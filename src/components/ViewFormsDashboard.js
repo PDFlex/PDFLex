@@ -85,7 +85,7 @@ const ViewFormsDashboard = () => {
 
     // Retreives all forms associated with the claimId. Associated with ViewFormsDashboardUseCase.
     useEffect(() => {
-        const url = 'https://pdflex-backend.duckdns.org/' + clientId.toString() + '/' + claimId.toString() +'/forms';
+        const url = 'http://localhost:8080/' + clientId.toString() + '/' + claimId.toString() +'/forms';
 
         axios.get(url).then((res) => {
             // const data = res.json();
@@ -111,7 +111,7 @@ const ViewFormsDashboard = () => {
 
     // Creates a new claim. Associated with CreateNewClaimUseCase.
     function SubmitClaim() {
-        let url = "https://pdflex-backend.duckdns.org/" + clientId.toString() + "/" + claimId.toString() + "/submit"
+        let url = "http://localhost:8080/" + clientId.toString() + "/" + claimId.toString() + "/submit"
 
         axios.get(url).then((res) => {
             setSubmitted(Boolean(res.data))

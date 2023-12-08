@@ -86,7 +86,7 @@ const Upload = () => {
     // Configures the PDF information and sends it to the OCR
     function handleSubmit(event) {
         event.preventDefault()
-        const url = 'https://pdflex-backend.duckdns.org/pdf';
+        const url = 'http://localhost:8080/pdf';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', file.name);

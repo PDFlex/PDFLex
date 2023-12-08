@@ -177,7 +177,7 @@ const Form = () => {
             nameOfKin, relationshipToInsured, kinAddress, kinContactNumber, kinSignature, dateSigned
         };
 
-        const url = 'https://pdflex-backend.duckdns.org/form-info/' + claimId.toString();
+        const url = 'http://localhost:8080/form-info/' + claimId.toString();
         axios.post(url, form).then(() => {
             navigate('/ViewFormsDashboard');
         });
@@ -187,7 +187,7 @@ const Form = () => {
     // Retrieves form fields from the backend and populates the frontend form fields.
     // Associated with RetrieveFormUseCase.
     useEffect(() => {
-        const url = 'https://pdflex-backend.duckdns.org/retrieve-info/' + claimId.toString();
+        const url = 'http://localhost:8080/retrieve-info/' + claimId.toString();
         axios.get(url, claimId).then((res) => {
                 setCompletedDeathCertificate(res.data.completedDeathCertificate);
                 setAttachedDeathCertificate(res.data.attachedDeathCertificate);
